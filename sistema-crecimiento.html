@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema de Crecimiento en Redes — Vanessa Cid</title>
+<meta name="description" content="Deja de improvisar y empieza a tener estrategia. Estrategia mensual personalizada, ideas de contenido, guiones y optimización de perfil.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F5F0E8;--pink:#F07BAE;--pink-light:#FBEAF2;--orange:#C85A1E;--orange-light:#F5E8E0;--dark:#1A1714;--mid:#5C5650;--white:#FFFFFF;--fd:'Playfair Display',Georgia,serif;--fb:'DM Sans',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--fb);background:var(--white);color:var(--dark);}
+nav{padding:1.25rem 2.5rem;display:flex;align-items:center;justify-content:space-between;background:rgba(245,240,232,0.97);border-bottom:1px solid rgba(200,90,30,0.1);position:sticky;top:0;z-index:10;}
+.nav-back{font-size:0.82rem;color:var(--mid);text-decoration:none;}
+.nav-back:hover{color:var(--orange);}
+.nav-logo{font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--orange);text-decoration:none;}
+.nav-cta{background:var(--orange);color:var(--white);padding:0.45rem 1.1rem;border-radius:100px;font-size:0.8rem;font-weight:700;text-decoration:none;}
+
+.hero{background:var(--cream);padding:5rem;}
+.hero-inner{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:5rem;align-items:center;}
+.h-tag{display:inline-block;background:var(--orange-light);color:var(--orange);font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.4rem 1rem;border-radius:100px;margin-bottom:1.25rem;}
+.h-title{font-family:var(--fd);font-size:clamp(2.2rem,4vw,3.4rem);font-weight:900;line-height:1.05;letter-spacing:-0.025em;color:var(--dark);margin-bottom:1rem;}
+.h-title span{color:var(--orange);}
+.h-sub{font-size:1rem;color:var(--mid);line-height:1.7;margin-bottom:2rem;}
+.h-cta{display:inline-block;background:var(--orange);color:var(--white);padding:1rem 2rem;border-radius:100px;font-weight:700;font-size:0.95rem;text-decoration:none;}
+.hero-card{background:var(--white);border-radius:24px;padding:2rem;box-shadow:0 4px 24px rgba(0,0,0,0.06);}
+.hero-card-title{font-family:var(--fd);font-size:1.2rem;font-weight:700;color:var(--dark);margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--cream);}
+.hero-card-item{display:flex;align-items:center;gap:0.75rem;padding:0.6rem 0;border-bottom:1px solid var(--cream);}
+.hero-card-item:last-child{border-bottom:none;}
+.hci-icon{font-size:1.2rem;flex-shrink:0;}
+.hci-txt{font-size:0.875rem;color:var(--mid);line-height:1.4;}
+.hci-txt strong{color:var(--dark);}
+
+.para-quien-sec{background:var(--white);padding:5rem;}
+.sec-inner{max-width:960px;margin:0 auto;}
+.section-tag{font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--orange);margin-bottom:0.75rem;}
+.section-title{font-family:var(--fd);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;line-height:1.1;letter-spacing:-0.02em;margin-bottom:2rem;}
+.section-title span{color:var(--orange);}
+.diferencia-box{background:var(--pink-light);border-radius:20px;padding:2rem;margin-bottom:2rem;}
+.diferencia-box p{font-size:1rem;color:var(--dark);line-height:1.7;}
+.diferencia-box p strong{color:var(--orange);}
+.quien-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.quien-card{background:var(--cream);border-radius:16px;padding:1.5rem;border-left:4px solid var(--pink);}
+.quien-emoji{font-size:1.5rem;margin-bottom:0.5rem;}
+.quien-txt{font-size:0.875rem;color:var(--dark);font-weight:500;line-height:1.4;}
+
+.incluye-sec{background:var(--cream);padding:5rem;}
+.incluye-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:1rem;}
+.inc-card{background:var(--white);border-radius:18px;padding:1.5rem;}
+.inc-icon{font-size:1.75rem;margin-bottom:0.75rem;}
+.inc-title{font-weight:700;font-size:0.95rem;color:var(--dark);margin-bottom:0.4rem;}
+.inc-desc{font-size:0.82rem;color:var(--mid);line-height:1.5;}
+.no-incluye{background:var(--white);border-radius:18px;padding:1.75rem;margin-top:1.5rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;}
+.no-title{font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-bottom:0.75rem;flex-shrink:0;}
+.no-tags{display:flex;gap:0.5rem;flex-wrap:wrap;}
+.no-tag{background:var(--cream);color:var(--mid);font-size:0.78rem;padding:0.3rem 0.75rem;border-radius:100px;opacity:0.7;}
+
+.diferencia-sec{background:var(--dark);padding:5rem;}
+.diferencia-sec .section-tag{color:var(--pink);}
+.diferencia-sec .section-title{color:var(--white);}
+.dif-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem;}
+.dif-card{border-radius:20px;padding:2rem;}
+.dif-card.antes{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);}
+.dif-card.despues{background:rgba(200,90,30,0.15);border:1px solid rgba(200,90,30,0.3);}
+.dif-label{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;}
+.dif-card.antes .dif-label{color:rgba(245,240,232,0.35);}
+.dif-card.despues .dif-label{color:var(--orange);}
+.dif-item{font-size:0.875rem;line-height:1.5;padding:0.4rem 0;display:flex;align-items:flex-start;gap:0.6rem;}
+.dif-card.antes .dif-item{color:rgba(245,240,232,0.45);}
+.dif-card.despues .dif-item{color:rgba(245,240,232,0.85);}
+.dif-card.antes .dif-item::before{content:'✗';color:rgba(245,240,232,0.25);flex-shrink:0;}
+.dif-card.despues .dif-item::before{content:'✔';color:var(--orange);flex-shrink:0;}
+
+.proceso-sec{background:var(--white);padding:5rem;}
+.proceso-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:1.5rem;}
+.paso{text-align:center;padding:1.5rem;}
+.paso-num{font-family:var(--fd);font-size:3rem;font-weight:900;color:var(--orange-light);line-height:1;margin-bottom:-0.5rem;}
+.paso-icon{font-size:1.75rem;margin-bottom:0.75rem;}
+.paso-title{font-weight:700;font-size:0.95rem;color:var(--dark);margin-bottom:0.4rem;}
+.paso-desc{font-size:0.82rem;color:var(--mid);line-height:1.5;}
+
+.cta-final{background:var(--orange);padding:5rem;text-align:center;}
+.cta-title{font-family:var(--fd);font-size:clamp(2rem,4vw,3rem);font-weight:900;color:var(--white);margin-bottom:1rem;line-height:1.1;}
+.cta-sub{font-size:1rem;color:rgba(255,255,255,0.75);max-width:520px;margin:0 auto 2rem;line-height:1.7;}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.cta-btn{display:inline-flex;align-items:center;gap:0.75rem;background:var(--white);color:var(--orange);padding:1rem 2rem;border-radius:100px;font-weight:700;font-size:0.95rem;text-decoration:none;}
+.cta-btn.outline{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,0.4);}
+
+footer{background:var(--dark);padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;}
+.footer-logo{font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--orange);}
+.footer-copy{font-size:0.75rem;color:rgba(245,240,232,0.3);}
+
+@media(max-width:900px){
+  .hero-inner,.dif-grid{grid-template-columns:1fr;}
+  .quien-grid,.incluye-grid,.proceso-grid{grid-template-columns:1fr 1fr;}
+  .hero,.para-quien-sec,.incluye-sec,.diferencia-sec,.proceso-sec,.cta-final{padding:3.5rem 1.5rem;}
+  footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.5rem;}
+}
+@media(max-width:600px){
+  .quien-grid,.incluye-grid,.proceso-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-back">← Servicios</a>
+  <a href="index.html" class="nav-logo">vanessa cid</a>
+  <a href="contacto.html" class="nav-cta">Contactar</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="h-tag">🚀 Servicio estratégico mensual</div>
+      <h1 class="h-title">Deja de improvisar.<br><span>Empieza a crecer con estrategia.</span></h1>
+      <p class="h-sub">Un sistema mensual de estrategia de contenido diseñado para tu negocio. Tú tienes las ideas y el negocio — yo te doy la estructura, los guiones y el plan para que funcione de verdad.</p>
+      <a href="contacto.html" class="h-cta">Quiero este servicio</a>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-title">Sistema de Crecimiento en Redes</div>
+      <div class="hero-card-item"><div class="hci-icon">📋</div><div class="hci-txt"><strong>Estrategia mensual</strong> personalizada para tu negocio</div></div>
+      <div class="hero-card-item"><div class="hci-icon">💡</div><div class="hci-txt"><strong>12–16 ideas de contenido</strong> listas para ejecutar</div></div>
+      <div class="hero-card-item"><div class="hci-icon">🎬</div><div class="hci-txt"><strong>Guiones para reels</strong> adaptados a tu voz</div></div>
+      <div class="hero-card-item"><div class="hci-icon">👤</div><div class="hci-txt"><strong>Optimización de perfil</strong> para que convierta</div></div>
+      <div class="hero-card-item"><div class="hci-icon">📅</div><div class="hci-txt"><strong>Calendario editorial</strong> completo del mes</div></div>
+      <div class="hero-card-item"><div class="hci-icon">🔄</div><div class="hci-txt"><strong>Revisión y feedback</strong> semanal</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="para-quien-sec">
+  <div class="sec-inner">
+    <p class="section-tag">¿Para quién es?</p>
+    <h2 class="section-title">Para ti si ya tienes<br><span>negocio pero no resultados.</span></h2>
+    <div class="diferencia-box">
+      <p>Este servicio es para negocios que <strong>ya están activos en redes pero no están viendo resultados.</strong> Tienes contenido, tienes seguidores, publicas de vez en cuando… pero no se traduce en clientes. El problema no es lo que publicas — es que no hay un sistema detrás.</p>
+    </div>
+    <div class="quien-grid">
+      <div class="quien-card"><div class="quien-emoji">😤</div><div class="quien-txt">Publicas pero no sabes si lo que haces funciona</div></div>
+      <div class="quien-card"><div class="quien-emoji">⏰</div><div class="quien-txt">No tienes tiempo de pensar la estrategia cada mes</div></div>
+      <div class="quien-card"><div class="quien-emoji">🎯</div><div class="quien-txt">Quieres un plan claro sin tener que crearlo tú</div></div>
+      <div class="quien-card"><div class="quien-emoji">📱</div><div class="quien-txt">Prefieres grabar y publicar tú mismo pero con dirección</div></div>
+      <div class="quien-card"><div class="quien-emoji">💼</div><div class="quien-txt">Tienes un buen negocio que tus redes no reflejan</div></div>
+      <div class="quien-card"><div class="quien-emoji">🚀</div><div class="quien-txt">Quieres crecer de forma consistente, no por casualidad</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="incluye-sec">
+  <div class="sec-inner">
+    <p class="section-tag">Qué incluye</p>
+    <h2 class="section-title">Todo lo que recibes<br><span>cada mes.</span></h2>
+    <div class="incluye-grid">
+      <div class="inc-card"><div class="inc-icon">🧠</div><div class="inc-title">Estrategia mensual personalizada</div><div class="inc-desc">Un plan adaptado a tu negocio, tu audiencia y tus objetivos de ese mes. No es genérico — es tuyo.</div></div>
+      <div class="inc-card"><div class="inc-icon">💡</div><div class="inc-title">12–16 ideas de contenido</div><div class="inc-desc">Ideas concretas y desarrolladas. No son solo temas — son conceptos listos para convertirse en reels, carruseles o posts.</div></div>
+      <div class="inc-card"><div class="inc-icon">🎬</div><div class="inc-title">Guiones para reels</div><div class="inc-desc">Guiones completos con hook, desarrollo y CTA. Adaptados a tu forma de hablar para que suenen naturales.</div></div>
+      <div class="inc-card"><div class="inc-icon">👤</div><div class="inc-title">Optimización de perfil</div><div class="inc-desc">Revisión y mejora de tu bio, nombre, foto, destacadas y posts fijados para que el perfil convierta visitas en clientes.</div></div>
+      <div class="inc-card"><div class="inc-icon">📅</div><div class="inc-title">Calendario editorial</div><div class="inc-desc">Estructura clara de qué publicar cada día — con pilares, formatos y objetivos de cada publicación.</div></div>
+      <div class="inc-card"><div class="inc-icon">🔄</div><div class="inc-title">Revisión y feedback semanal</div><div class="inc-desc">Analizo lo que publicaste, veo qué funcionó y ajusto la estrategia para la semana siguiente.</div></div>
+    </div>
+    <div class="no-incluye">
+      <div>
+        <div class="no-title">No incluye</div>
+        <div class="no-tags">
+          <span class="no-tag">✗ Creación de contenido</span>
+          <span class="no-tag">✗ Grabación</span>
+          <span class="no-tag">✗ Edición de vídeos</span>
+          <span class="no-tag">✗ Automatización</span>
+        </div>
+      </div>
+      <div style="font-size:0.85rem;color:var(--mid);line-height:1.6;max-width:400px;">
+        ¿Quieres que también cree el contenido? Echa un vistazo al <a href="contenido-estrategico.html" style="color:var(--orange);font-weight:600;text-decoration:none;">Contenido Estratégico Pro →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="diferencia-sec">
+  <div class="sec-inner">
+    <p class="section-tag">La diferencia</p>
+    <h2 class="section-title">Antes y después<br><span style="color:var(--pink)">de tener estrategia.</span></h2>
+    <div class="dif-grid">
+      <div class="dif-card antes">
+        <div class="dif-label">Sin sistema</div>
+        <div class="dif-item">Publicas cuando tienes tiempo o inspiración</div>
+        <div class="dif-item">No sabes qué funciona ni por qué</div>
+        <div class="dif-item">Cada semana empiezas desde cero</div>
+        <div class="dif-item">Tu contenido no conecta con clientes</div>
+        <div class="dif-item">Sientes que pierdes el tiempo en redes</div>
+      </div>
+      <div class="dif-card despues">
+        <div class="dif-label">Con el Sistema de Crecimiento</div>
+        <div class="dif-item">Tienes un plan claro para todo el mes</div>
+        <div class="dif-item">Sabes qué publicar, cuándo y por qué</div>
+        <div class="dif-item">Cada contenido tiene una intención</div>
+        <div class="dif-item">Tu perfil atrae y convierte seguidores en clientes</div>
+        <div class="dif-item">Las redes trabajan para tu negocio</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="proceso-sec">
+  <div class="sec-inner">
+    <p class="section-tag">Cómo funciona</p>
+    <h2 class="section-title">Así trabajamos <span>juntos cada mes.</span></h2>
+    <div class="proceso-grid">
+      <div class="paso"><div class="paso-num">01</div><div class="paso-icon">📩</div><div class="paso-title">Onboarding</div><div class="paso-desc">Me cuentas tu negocio, audiencia, objetivos y lo que has hecho hasta ahora.</div></div>
+      <div class="paso"><div class="paso-num">02</div><div class="paso-icon">🧠</div><div class="paso-title">Estrategia</div><div class="paso-desc">Diseño tu plan mensual con ideas, guiones, calendario y optimizaciones.</div></div>
+      <div class="paso"><div class="paso-num">03</div><div class="paso-icon">🎬</div><div class="paso-title">Tú publicas</div><div class="paso-desc">Grabas y publicas con el plan en mano. Yo estoy disponible para resolver dudas.</div></div>
+      <div class="paso"><div class="paso-num">04</div><div class="paso-icon">📊</div><div class="paso-title">Revisión</div><div class="paso-desc">Analizo resultados, doy feedback y ajusto para el siguiente mes.</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-final">
+  <h2 class="cta-title">¿Listo para dejar de improvisar<br>y empezar a crecer de verdad?</h2>
+  <p class="cta-sub">Cuéntame tu situación y vemos si este servicio es lo que necesitas ahora mismo.</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/34611789200" target="_blank" class="cta-btn">💬 WhatsApp</a>
+    <a href="contacto.html" class="cta-btn outline">✉️ Formulario de contacto</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">vanessa cid</div>
+  <p class="footer-copy">© 2025 Vanessa Cid · Marketing & IA para negocios</p>
+</footer>
+</body>
+</html>

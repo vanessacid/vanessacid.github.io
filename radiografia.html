@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radiografía Digital 360° — Vanessa Cid</title>
+<meta name="description" content="Entiende qué está fallando en tus redes y qué hacer para solucionarlo. Análisis completo con recomendaciones claras y accionables.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F5F0E8;--pink:#F07BAE;--pink-light:#FBEAF2;--orange:#C85A1E;--orange-light:#F5E8E0;--dark:#1A1714;--mid:#5C5650;--white:#FFFFFF;--fd:'Playfair Display',Georgia,serif;--fb:'DM Sans',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--fb);background:var(--white);color:var(--dark);}
+nav{padding:1.25rem 2.5rem;display:flex;align-items:center;justify-content:space-between;background:rgba(245,240,232,0.97);border-bottom:1px solid rgba(200,90,30,0.1);position:sticky;top:0;z-index:10;}
+.nav-back{font-size:0.82rem;color:var(--mid);text-decoration:none;}
+.nav-back:hover{color:var(--orange);}
+.nav-logo{font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--orange);text-decoration:none;}
+.nav-cta{background:var(--orange);color:var(--white);padding:0.45rem 1.1rem;border-radius:100px;font-size:0.8rem;font-weight:700;text-decoration:none;}
+.hero{background:var(--cream);padding:5rem 5rem 4rem;}
+.hero-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.h-tag{display:inline-block;background:var(--orange-light);color:var(--orange);font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.4rem 1rem;border-radius:100px;margin-bottom:1rem;}
+.h-title{font-family:var(--fd);font-size:clamp(2.2rem,4vw,3.2rem);font-weight:900;line-height:1.05;letter-spacing:-0.025em;margin-bottom:1rem;}
+.h-title span{color:var(--orange);}
+.h-sub{font-size:1rem;color:var(--mid);line-height:1.7;margin-bottom:2rem;}
+.h-cta{display:inline-block;background:var(--orange);color:var(--white);padding:1rem 2rem;border-radius:100px;font-weight:700;font-size:0.95rem;text-decoration:none;}
+.h-card{background:var(--white);border-radius:24px;padding:2.5rem;box-shadow:0 4px 24px rgba(0,0,0,0.06);}
+.h-card-icon{font-size:3rem;margin-bottom:1rem;}
+.h-card-title{font-family:var(--fd);font-size:1.5rem;font-weight:700;color:var(--dark);margin-bottom:0.5rem;}
+.h-card-sub{font-size:0.9rem;color:var(--mid);margin-bottom:1.5rem;}
+.h-card-precio{font-family:var(--fd);font-size:2.5rem;font-weight:900;color:var(--orange);}
+.h-card-nota{font-size:0.75rem;color:var(--mid);margin-top:0.25rem;}
+section{padding:5rem;}
+.section-inner{max-width:900px;margin:0 auto;}
+.section-tag{font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--orange);margin-bottom:0.75rem;}
+.section-title{font-family:var(--fd);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.5rem;}
+.section-title span{color:var(--orange);}
+.incluye-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1.5rem;}
+.incluye-item{background:var(--cream);border-radius:16px;padding:1.5rem;display:flex;gap:1rem;align-items:flex-start;}
+.incluye-icon{font-size:1.5rem;flex-shrink:0;}
+.incluye-titulo{font-weight:700;font-size:0.95rem;color:var(--dark);margin-bottom:0.3rem;}
+.incluye-desc{font-size:0.82rem;color:var(--mid);line-height:1.5;}
+.entrega{background:var(--dark);border-radius:24px;padding:2.5rem;margin-top:2rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;}
+.entrega-title{font-family:var(--fd);font-size:1.4rem;font-weight:700;color:var(--white);margin-bottom:1rem;}
+.entrega-item{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.6rem;}
+.entrega-dot{width:8px;height:8px;background:var(--pink);border-radius:50%;flex-shrink:0;}
+.entrega-txt{font-size:0.9rem;color:rgba(245,240,232,0.7);}
+.para-quien{background:var(--pink-light);}
+.quien-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem;}
+.quien-item{background:var(--white);border-radius:16px;padding:1.5rem;border-left:4px solid var(--pink);}
+.quien-emoji{font-size:1.5rem;margin-bottom:0.5rem;}
+.quien-txt{font-size:0.9rem;color:var(--dark);font-weight:500;line-height:1.4;}
+.proceso{background:var(--white);}
+.proceso-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1.5rem;}
+.step{text-align:center;padding:1.5rem;}
+.step-num{font-family:var(--fd);font-size:3rem;font-weight:900;color:var(--orange-light);line-height:1;margin-bottom:-0.5rem;}
+.step-icon{font-size:1.75rem;margin-bottom:0.75rem;}
+.step-title{font-weight:700;font-size:0.95rem;color:var(--dark);margin-bottom:0.4rem;}
+.step-desc{font-size:0.82rem;color:var(--mid);line-height:1.5;}
+.cta-final{background:var(--orange);padding:5rem;text-align:center;}
+.cta-title{font-family:var(--fd);font-size:clamp(2rem,4vw,3rem);font-weight:900;color:var(--white);margin-bottom:1rem;line-height:1.1;}
+.cta-sub{font-size:1rem;color:rgba(255,255,255,0.75);max-width:500px;margin:0 auto 2rem;line-height:1.7;}
+.cta-btn{display:inline-flex;align-items:center;gap:0.75rem;background:var(--white);color:var(--orange);padding:1rem 2.5rem;border-radius:100px;font-weight:700;font-size:0.95rem;text-decoration:none;}
+footer{background:var(--dark);padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;}
+.footer-logo{font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--orange);}
+.footer-copy{font-size:0.75rem;color:rgba(245,240,232,0.3);}
+@media(max-width:900px){.hero-inner,.incluye-grid,.entrega,.quien-grid,.proceso-steps{grid-template-columns:1fr;} .hero{padding:4rem 1.5rem;} section{padding:3.5rem 1.5rem;} .cta-final{padding:3.5rem 1.5rem;} footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.5rem;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-back">← Servicios</a>
+  <a href="index.html" class="nav-logo">vanessa cid</a>
+  <a href="contacto.html" class="nav-cta">Contactar</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="h-tag">🔍 Servicio estratégico</div>
+      <h1 class="h-title">Radiografía<br><span>Digital 360°</span></h1>
+      <p class="h-sub">Un análisis completo de tus redes para entender exactamente qué está fallando y qué hacer para solucionarlo. Sin rodeos, sin teoría — solo acción.</p>
+      <a href="contacto.html" class="h-cta">Quiero mi radiografía</a>
+    </div>
+    <div class="h-card">
+      <div class="h-card-icon">🔍</div>
+      <div class="h-card-title">Radiografía Digital 360°</div>
+      <div class="h-card-sub">Entiende qué está fallando en tus redes</div>
+      <div class="h-card-precio">Contacta</div>
+      <div class="h-card-nota">para presupuesto personalizado</div>
+    </div>
+  </div>
+</div>
+
+<section style="background:var(--white);">
+  <div class="section-inner">
+    <p class="section-tag">Qué incluye</p>
+    <h2 class="section-title">Todo lo que obtienes<br><span>en tu radiografía.</span></h2>
+    <div class="incluye-grid">
+      <div class="incluye-item"><div class="incluye-icon">📊</div><div><div class="incluye-titulo">Análisis completo de tus redes</div><div class="incluye-desc">Revisión profunda de Instagram y/o TikTok — métricas, contenido, frecuencia y rendimiento.</div></div></div>
+      <div class="incluye-item"><div class="incluye-icon">👤</div><div><div class="incluye-titulo">Revisión de perfil</div><div class="incluye-desc">Bio, foto, nombre, highlights, posts fijados. Todo lo que la gente ve en los primeros 3 segundos.</div></div></div>
+      <div class="incluye-item"><div class="incluye-icon">🎯</div><div><div class="incluye-titulo">Evaluación de contenido actual</div><div class="incluye-desc">Qué está funcionando, qué no y por qué. Sin suposiciones — con datos reales.</div></div></div>
+      <div class="incluye-item"><div class="incluye-icon">🚫</div><div><div class="incluye-titulo">Detección de errores</div><div class="incluye-desc">Los puntos exactos que están frenando tu crecimiento y alejando a posibles clientes.</div></div></div>
+      <div class="incluye-item"><div class="incluye-icon">💡</div><div><div class="incluye-titulo">10 ideas de contenido</div><div class="incluye-desc">Ideas concretas adaptadas a tu negocio, tu audiencia y tu sector. Listas para ejecutar.</div></div></div>
+      <div class="incluye-item"><div class="incluye-icon">✅</div><div><div class="incluye-titulo">Recomendaciones accionables</div><div class="incluye-desc">Un plan claro de qué mejorar primero. Sin abrumarte — paso a paso y con prioridades.</div></div></div>
+    </div>
+    <div class="entrega">
+      <div>
+        <div class="entrega-title">¿Cómo se entrega?</div>
+        <div class="entrega-item"><div class="entrega-dot"></div><div class="entrega-txt">Vídeo personalizado explicando todo el análisis</div></div>
+        <div class="entrega-item"><div class="entrega-dot"></div><div class="entrega-txt">Documento resumen con todas las recomendaciones</div></div>
+        <div class="entrega-item"><div class="entrega-dot"></div><div class="entrega-txt">Las 10 ideas de contenido por escrito</div></div>
+        <div class="entrega-item"><div class="entrega-dot"></div><div class="entrega-txt">Entrega en 48-72 horas desde el inicio</div></div>
+      </div>
+      <div style="background:rgba(255,255,255,0.05);border-radius:16px;padding:1.5rem;">
+        <p style="font-size:0.8rem;color:rgba(245,240,232,0.5);text-transform:uppercase;letter-spacing:0.1em;font-weight:700;margin-bottom:0.75rem;">No incluye</p>
+        <div class="entrega-item"><div class="entrega-dot" style="background:rgba(245,240,232,0.2)"></div><div class="entrega-txt" style="opacity:0.5;">Implementación de cambios</div></div>
+        <div class="entrega-item"><div class="entrega-dot" style="background:rgba(245,240,232,0.2)"></div><div class="entrega-txt" style="opacity:0.5;">Seguimiento posterior</div></div>
+        <div class="entrega-item"><div class="entrega-dot" style="background:rgba(245,240,232,0.2)"></div><div class="entrega-txt" style="opacity:0.5;">Creación de contenido</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="para-quien">
+  <div class="section-inner">
+    <p class="section-tag">¿Para quién es?</p>
+    <h2 class="section-title">Ideal para ti <span>si...</span></h2>
+    <div class="quien-grid">
+      <div class="quien-item"><div class="quien-emoji">😤</div><div class="quien-txt">Publicas pero no ves resultados y no entiendes por qué</div></div>
+      <div class="quien-item"><div class="quien-emoji">🔍</div><div class="quien-txt">Quieres saber exactamente qué está fallando antes de invertir más</div></div>
+      <div class="quien-item"><div class="quien-emoji">🚀</div><div class="quien-txt">Estás empezando y quieres hacerlo bien desde el principio</div></div>
+      <div class="quien-item"><div class="quien-emoji">💼</div><div class="quien-txt">Tienes un buen negocio pero tus redes no lo reflejan</div></div>
+      <div class="quien-item"><div class="quien-emoji">⏰</div><div class="quien-txt">No tienes tiempo para probar y equivocarte — necesitas claridad ya</div></div>
+      <div class="quien-item"><div class="quien-emoji">🎯</div><div class="quien-txt">Quieres un diagnóstico real antes de contratar un servicio mensual</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="proceso">
+  <div class="section-inner">
+    <p class="section-tag">Cómo funciona</p>
+    <h2 class="section-title">El proceso es <span>muy sencillo.</span></h2>
+    <div class="proceso-steps">
+      <div class="step"><div class="step-num">01</div><div class="step-icon">📩</div><div class="step-title">Me contactas</div><div class="step-desc">Me escribes por WhatsApp o email y me cuentas tu negocio y tus redes.</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-icon">🔍</div><div class="step-title">Hago el análisis</div><div class="step-desc">Analizo tu cuenta en profundidad. En 48-72h tienes tu radiografía lista.</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-icon">🎯</div><div class="step-title">Recibes tu plan</div><div class="step-desc">Vídeo + documento con todo lo que necesitas saber para mejorar desde ya.</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-final">
+  <h2 class="cta-title">¿Lista para saber<br>qué está fallando?</h2>
+  <p class="cta-sub">Sin rodeos, sin humo. Solo claridad y un plan de acción real para tu negocio.</p>
+  <a href="https://wa.me/34611789200" target="_blank" class="cta-btn">💬 Quiero mi radiografía</a>
+</div>
+
+<footer>
+  <div class="footer-logo">vanessa cid</div>
+  <p class="footer-copy">© 2025 Vanessa Cid · Marketing & IA para negocios</p>
+</footer>
+</body>
+</html>

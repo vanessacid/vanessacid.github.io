@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Ready — Vanessa Cid</title>
+<meta name="description" content="Solo creación de contenido, sin estrategia ni gestión. Contenido listo para publicar. Para negocios que saben qué comunicar pero no tienen tiempo de crearlo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F5F0E8;--pink:#F07BAE;--pink-light:#FBEAF2;--orange:#C85A1E;--orange-light:#F5E8E0;--dark:#1A1714;--mid:#5C5650;--white:#FFFFFF;--fd:'Playfair Display',Georgia,serif;--fb:'DM Sans',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--fb);background:var(--white);color:var(--dark);}
+nav{padding:1.25rem 2.5rem;display:flex;align-items:center;justify-content:space-between;background:rgba(245,240,232,0.97);border-bottom:1px solid rgba(200,90,30,0.1);position:sticky;top:0;z-index:10;}
+.nav-back{font-size:0.82rem;color:var(--mid);text-decoration:none;}
+.nav-back:hover{color:var(--orange);}
+.nav-logo{font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--orange);text-decoration:none;}
+.nav-cta{background:var(--orange);color:var(--white);padding:0.45rem 1.1rem;border-radius:100px;font-size:0.8rem;font-weight:700;text-decoration:none;}
+.hero{background:var(--pink-light);padding:5rem;}
+.hero-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.h-tag{display:inline-block;background:var(--white);color:var(--pink);font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.4rem 1rem;border-radius:100px;margin-bottom:1rem;}
+.h-title{font-family:var(--fd);font-size:clamp(2.2rem,4vw,3.2rem);font-weight:900;line-height:1.05;letter-spacing:-0.025em;color:var(--dark);margin-bottom:1rem;}
+.h-title span{color:var(--orange);}
+.h-sub{font-size:1rem;color:var(--mid);line-height:1.7;margin-bottom:0.75rem;}
+.h-nota{font-size:0.85rem;color:var(--orange);font-weight:600;margin-bottom:2rem;}
+.h-cta{display:inline-block;background:var(--orange);color:var(--white);padding:1rem 2rem;border-radius:100px;font-weight:700;font-size:0.95rem;text-decoration:none;}
+.h-visual{background:var(--white);border-radius:24px;padding:2rem;box-shadow:0 4px 24px rgba(0,0,0,0.06);}
+.proceso-strip{display:flex;align-items:center;justify-content:center;gap:1rem;padding:0.5rem 0;}
+.paso-item{text-align:center;flex:1;}
+.paso-emoji{font-size:2rem;margin-bottom:0.5rem;}
+.paso-txt{font-size:0.78rem;font-weight:600;color:var(--dark);}
+.paso-arrow{color:var(--orange-light);font-size:1.5rem;flex-shrink:0;}
+.servicios-section{background:var(--white);padding:5rem;}
+.servicios-inner{max-width:900px;margin:0 auto;}
+.section-tag{font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--orange);margin-bottom:0.75rem;}
+.section-title{font-family:var(--fd);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;line-height:1.1;letter-spacing:-0.02em;margin-bottom:2rem;}
+.section-title span{color:var(--orange);}
+.servicios-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.serv-card{background:var(--cream);border-radius:24px;padding:2rem;transition:transform 0.2s;}
+.serv-card:hover{transform:translateY(-4px);}
+.serv-icon{font-size:2rem;margin-bottom:1rem;}
+.serv-name{font-family:var(--fd);font-size:1.3rem;font-weight:700;color:var(--dark);margin-bottom:0.5rem;}
+.serv-desc{font-size:0.9rem;color:var(--mid);line-height:1.6;margin-bottom:1.25rem;}
+.serv-nota{font-size:0.78rem;color:var(--orange);font-style:italic;margin-bottom:1.5rem;}
+.serv-btn{display:inline-block;background:var(--orange);color:var(--white);padding:0.75rem 1.5rem;border-radius:100px;font-weight:700;font-size:0.85rem;text-decoration:none;}
+.pack-recomendado{background:var(--dark);border-radius:24px;padding:2.5rem;margin-top:1.5rem;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;}
+.pack-badge{display:inline-block;background:var(--pink);color:var(--white);font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.25rem 0.75rem;border-radius:100px;margin-bottom:0.75rem;}
+.pack-title{font-family:var(--fd);font-size:1.5rem;font-weight:700;color:var(--white);margin-bottom:0.5rem;}
+.pack-desc{font-size:0.9rem;color:rgba(245,240,232,0.6);line-height:1.6;}
+.pack-items{margin-top:1rem;display:flex;flex-direction:column;gap:0.4rem;}
+.pack-item{font-size:0.85rem;color:rgba(245,240,232,0.7);display:flex;align-items:center;gap:0.5rem;}
+.pack-item::before{content:'✔';color:var(--pink);font-size:0.75rem;}
+.pack-cta{text-align:center;}
+.pack-precio{font-family:var(--fd);font-size:2rem;font-weight:900;color:var(--orange);margin-bottom:0.25rem;}
+.pack-precio-nota{font-size:0.75rem;color:rgba(245,240,232,0.4);margin-bottom:1.25rem;}
+.pack-btn{display:inline-block;background:var(--pink);color:var(--white);padding:0.85rem 1.75rem;border-radius:100px;font-weight:700;font-size:0.9rem;text-decoration:none;white-space:nowrap;}
+.para-quien{background:var(--cream);padding:5rem;}
+.para-quien-inner{max-width:900px;margin:0 auto;}
+.quien-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem;}
+.quien-item{background:var(--white);border-radius:16px;padding:1.5rem;border-left:4px solid var(--pink);}
+.quien-emoji{font-size:1.5rem;margin-bottom:0.5rem;}
+.quien-txt{font-size:0.9rem;color:var(--dark);font-weight:500;line-height:1.4;}
+.cta-final{background:var(--orange);padding:5rem;text-align:center;}
+.cta-title{font-family:var(--fd);font-size:clamp(2rem,4vw,3rem);font-weight:900;color:var(--white);margin-bottom:1rem;line-height:1.1;}
+.cta-sub{font-size:1rem;color:rgba(255,255,255,0.75);max-width:500px;margin:0 auto 2rem;line-height:1.7;}
+.cta-btn{display:inline-flex;align-items:center;gap:0.75rem;background:var(--white);color:var(--orange);padding:1rem 2.5rem;border-radius:100px;font-weight:700;font-size:0.95rem;text-decoration:none;}
+footer{background:var(--dark);padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;}
+.footer-logo{font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--orange);}
+.footer-copy{font-size:0.75rem;color:rgba(245,240,232,0.3);}
+@media(max-width:900px){.hero-inner,.servicios-grid,.pack-recomendado,.quien-grid{grid-template-columns:1fr;} .hero,.servicios-section,.para-quien,.cta-final{padding:3.5rem 1.5rem;} footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.5rem;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-back">← Servicios</a>
+  <a href="index.html" class="nav-logo">vanessa cid</a>
+  <a href="contacto.html" class="nav-cta">Contactar</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="h-tag">✦ Content Ready</div>
+      <h1 class="h-title">Contenido listo<br><span>para publicar.</span></h1>
+      <p class="h-sub">Solo creación de contenido — sin estrategia, sin gestión. Para negocios que ya saben qué comunicar pero no tienen tiempo de producirlo.</p>
+      <p class="h-nota">📍 Sesión presencial en tu negocio · Entrega en 48-72h</p>
+      <a href="contacto.html" class="h-cta">Quiero Content Ready</a>
+    </div>
+    <div class="h-visual">
+      <div class="proceso-strip">
+        <div class="paso-item"><div class="paso-emoji">📍</div><div class="paso-txt">Sesión<br>presencial</div></div>
+        <div class="paso-arrow">→</div>
+        <div class="paso-item"><div class="paso-emoji">🎬</div><div class="paso-txt">Edición<br>experta</div></div>
+        <div class="paso-arrow">→</div>
+        <div class="paso-item"><div class="paso-emoji">🚀</div><div class="paso-txt">Contenido<br>listo</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="servicios-section">
+  <div class="servicios-inner">
+    <p class="section-tag">Qué incluye</p>
+    <h2 class="section-title">Dos servicios,<br><span>o combínalos.</span></h2>
+    <div class="servicios-grid">
+      <div class="serv-card">
+        <div class="serv-icon">📍</div>
+        <div class="serv-name">Pauta de grabación</div>
+        <div class="serv-desc">Sesión presencial en tu negocio para generar contenido original en foto y vídeo en HD. Me encargo de la dirección creativa y las ideas.</div>
+        <div class="serv-nota">*Se entrega todo el contenido sin editar</div>
+        <a href="contacto.html" class="serv-btn">Pedir presupuesto</a>
+      </div>
+      <div class="serv-card">
+        <div class="serv-icon">🎬</div>
+        <div class="serv-name">Creación de contenido</div>
+        <div class="serv-desc">A partir del material grabado: reels editados, carruseles dinámicos y diseños tipo cartel. Todo listo para publicar directamente.</div>
+        <div class="serv-nota">*Listos para publicar</div>
+        <a href="contacto.html" class="serv-btn">Pedir presupuesto</a>
+      </div>
+    </div>
+
+    <div class="pack-recomendado">
+      <div>
+        <div class="pack-badge">✦ Recomendado</div>
+        <div class="pack-title">Pack Creación de Contenido</div>
+        <div class="pack-desc">Pensado para negocios que quieren contenido constante sin complicarse.</div>
+        <div class="pack-items">
+          <div class="pack-item">1 sesión de grabación presencial (1h)</div>
+          <div class="pack-item">4 piezas de contenido editadas (reels, carruseles o diseños)</div>
+          <div class="pack-item">Todo listo para publicar directamente</div>
+        </div>
+      </div>
+      <div class="pack-cta">
+        <div class="pack-precio">Contacta</div>
+        <div class="pack-precio-nota">para presupuesto</div>
+        <a href="https://wa.me/34611789200" target="_blank" class="pack-btn">💬 WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="para-quien">
+  <div class="para-quien-inner">
+    <p class="section-tag">¿Para quién es?</p>
+    <h2 class="section-title">Para ti si <span>reconoces esto.</span></h2>
+    <div class="quien-grid">
+      <div class="quien-item"><div class="quien-emoji">💼</div><div class="quien-txt">Tienes un negocio que ya funciona y sabes qué quieres comunicar</div></div>
+      <div class="quien-item"><div class="quien-emoji">⏰</div><div class="quien-txt">No tienes tiempo para crear el contenido tú mismo</div></div>
+      <div class="quien-item"><div class="quien-emoji">📱</div><div class="quien-txt">Quieres contenido profesional sin contratar un servicio mensual</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-final">
+  <h2 class="cta-title">¿Listo para tener<br>contenido que se vea increíble?</h2>
+  <p class="cta-sub">Sin estrés, sin perder tiempo. Solo contenido que convierte.</p>
+  <a href="https://wa.me/34611789200" target="_blank" class="cta-btn">💬 Envíame un mensaje</a>
+</div>
+
+<footer>
+  <div class="footer-logo">vanessa cid</div>
+  <p class="footer-copy">© 2025 Vanessa Cid · Marketing & IA para negocios</p>
+</footer>
+</body>
+</html>

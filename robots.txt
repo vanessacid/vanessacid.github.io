@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://vanessacid.com/sitemap.xml

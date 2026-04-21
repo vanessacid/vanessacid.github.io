@@ -1067,7 +1067,7 @@
   </a>
   <ul class="nav-links">
     <li><a href="#sobre-mi">Sobre mí</a></li>
-    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="servicios.html">Servicios</a></li>
     <li><a href="#proceso">Proceso</a></li>
     <li><a href="#talleres">Talleres</a></li>
     <li><a href="#blog">Blog</a></li>
@@ -1164,6 +1164,7 @@
   <div class="servicios-intro fade-up">
     <p class="section-tag">Servicios</p>
     <h2 class="section-title">Todo lo que necesitas<br><span>para crecer en redes.</span></h2>
+  <p style="font-size:0.9rem;color:var(--mid);margin-bottom:2rem;">Haz clic en cualquier servicio para ver todos los detalles. <a href="servicios.html" style="color:var(--orange);font-weight:700;text-decoration:none;">Ver todos los servicios →</a></p>
     <p>Estrategia, contenido y sistemas. Cada servicio está diseñado para un momento diferente de tu negocio — elige el que más se adapta a donde estás ahora.</p>
   </div>
 
@@ -1173,7 +1174,7 @@
   </div>
 
   <div class="serv-grid fade-up">
-    <div class="serv-card">
+    <div class="serv-card" style="cursor:pointer;">
       <div class="serv-emoji">🔍</div>
       <div class="serv-name">Radiografía Digital 360°</div>
       <div class="serv-tagline">Entiende qué está fallando en tus redes</div>
@@ -1574,7 +1575,7 @@
   <p class="footer-copy">© 2025 Vanessa Cid · Marketing & IA para negocios</p>
   <ul class="footer-links">
     <li><a href="#sobre-mi">Sobre mí</a></li>
-    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="servicios.html">Servicios</a></li>
     <li><a href="#talleres">Talleres</a></li>
     <li><a href="#blog">Blog</a></li>
     <li><a href="https://wa.me/34611789200" target="_blank">WhatsApp</a></li>
@@ -1592,5 +1593,29 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 
+<script>
+document.querySelectorAll('.serv-card').forEach(function(card) {
+  var btn = card.querySelector('.plan-btn');
+  if(btn) {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', function(e) {
+      if(!e.target.closest('a')) {
+        window.location.href = btn.href;
+      }
+    });
+  }
+});
+document.querySelectorAll('.plan-card').forEach(function(card) {
+  var btn = card.querySelector('.plan-btn');
+  if(btn) {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', function(e) {
+      if(!e.target.closest('a')) {
+        window.location.href = btn.href;
+      }
+    });
+  }
+});
+</script>
 </body>
 </html>

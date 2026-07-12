@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taller Instagram para negocios — 21 julio 2026 · Vigo · Gratuito | Vanessa Cid</title>
+<meta name="description" content="Taller gratuito Instagram para negocios que no tienen tiempo que perder. 21 de julio 2026, 10:00–13:30h, Sede ABANCA Vigo. Coffee break incluido.">
+<meta property="og:title" content="Taller gratuito Instagram para negocios · 21 julio · Vigo">
+<meta property="og:description" content="3 horas prácticas para vender más y ahorrar tiempo con Instagram. Inscripción gratuita.">
+<meta property="og:image" content="https://vanessacid.com/taller-julio.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#12002a;
+  --purple-mid:#1e0040;
+  --orange:#E8622A;
+  --pink:#C8326B;
+  --pink-bright:#e040a0;
+  --yellow:#FFD700;
+  --cream:#F5F0E8;
+  --white:#FFFFFF;
+  --fd:'Playfair Display',Georgia,serif;
+  --fb:'DM Sans',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--fb);background:var(--purple);color:var(--white);min-height:100vh;}
+
+nav{padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.07);}
+.nav-logo{font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--orange);text-decoration:none;}
+.nav-back{font-size:0.78rem;color:rgba(255,255,255,0.4);text-decoration:none;}
+.nav-back:hover{color:var(--white);}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1.1fr 1fr;min-height:90vh;align-items:center;padding:3.5rem 5rem;gap:4rem;position:relative;overflow:hidden;}
+.glow-pink{position:absolute;top:-10%;right:5%;width:500px;height:500px;background:radial-gradient(circle,rgba(200,50,107,0.35) 0%,transparent 65%);pointer-events:none;}
+.glow-orange{position:absolute;bottom:-15%;left:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(232,98,42,0.25) 0%,transparent 65%);pointer-events:none;}
+
+.hero-left{position:relative;z-index:2;}
+
+.aprende-strip{display:flex;align-items:center;gap:0.5rem;margin-bottom:1.5rem;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;}
+.strip-dot{color:var(--orange);}
+.strip-word{color:rgba(255,255,255,0.8);}
+.strip-word.orange{color:var(--orange);}
+.strip-word.pink{color:var(--pink-bright);}
+.strip-word.yellow{color:var(--yellow);}
+
+.h-title{font-family:var(--fd);font-size:clamp(2.8rem,5vw,4.2rem);font-weight:900;line-height:1.0;letter-spacing:-0.02em;margin-bottom:0.5rem;}
+.h-title .negocios{background:linear-gradient(90deg,var(--orange),var(--pink-bright));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.h-subtitle{display:inline-block;background:var(--orange);color:var(--white);font-size:1rem;font-style:italic;font-weight:600;padding:0.35rem 1.25rem;border-radius:8px;margin-bottom:1.5rem;}
+
+.h-desc{font-size:0.9rem;color:rgba(255,255,255,0.65);line-height:1.6;margin-bottom:2rem;letter-spacing:0.02em;}
+.h-desc strong{color:var(--white);}
+
+.detalles-list{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:flex;flex-direction:column;gap:0.75rem;}
+.det-row{display:flex;align-items:center;gap:0.75rem;font-size:0.82rem;color:rgba(255,255,255,0.75);}
+.det-row:not(:last-child){padding-bottom:0.75rem;border-bottom:1px solid rgba(255,255,255,0.06);}
+.det-icon{font-size:1.1rem;flex-shrink:0;width:24px;text-align:center;}
+.det-label{font-weight:600;color:var(--white);}
+.det-sub{color:var(--orange);font-weight:700;}
+
+.aprende-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:1.5rem;}
+.ap{display:flex;align-items:flex-start;gap:0.5rem;background:rgba(255,255,255,0.04);border-radius:10px;padding:0.65rem 0.75rem;}
+.ap-icon{font-size:1rem;flex-shrink:0;}
+.ap-txt{font-size:0.75rem;color:rgba(255,255,255,0.65);line-height:1.3;}
+
+.solidaridad{background:rgba(200,50,107,0.1);border:1px solid rgba(200,50,107,0.25);border-radius:14px;padding:1rem 1.25rem;display:flex;gap:0.75rem;align-items:flex-start;}
+.sol-heart{font-size:1.4rem;flex-shrink:0;}
+.sol-title{font-size:0.78rem;font-weight:700;color:var(--pink-bright);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem;}
+.sol-txt{font-size:0.72rem;color:rgba(255,255,255,0.5);line-height:1.4;}
+
+/* FORM */
+.form-card{background:rgba(255,255,255,0.05);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);border-radius:26px;padding:2.25rem;position:relative;z-index:2;}
+
+.plazas-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,215,0,0.1);border:1px solid rgba(255,215,0,0.3);border-radius:100px;padding:0.35rem 0.9rem;font-size:0.68rem;font-weight:700;color:var(--yellow);margin-bottom:1.25rem;letter-spacing:0.05em;text-transform:uppercase;}
+.pdot{width:7px;height:7px;background:var(--yellow);border-radius:50%;animation:pulse 1.5s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+
+.form-title{font-family:var(--fd);font-size:1.5rem;font-weight:700;color:var(--white);line-height:1.15;margin-bottom:0.3rem;}
+.form-sub{font-size:0.75rem;color:rgba(255,255,255,0.4);margin-bottom:1.5rem;line-height:1.5;}
+.form-sub .hl{color:var(--yellow);font-weight:600;}
+
+.fg{margin-bottom:0.85rem;}
+.fl{display:block;font-size:0.7rem;font-weight:600;color:rgba(255,255,255,0.45);margin-bottom:0.35rem;letter-spacing:0.03em;}
+.fi-w{position:relative;}
+.fi-i{position:absolute;left:0.85rem;top:50%;transform:translateY(-50%);font-size:0.8rem;pointer-events:none;}
+.fi{width:100%;padding:0.8rem 0.9rem 0.8rem 2.4rem;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);border-radius:11px;font-family:var(--fb);font-size:0.88rem;color:var(--white);outline:none;transition:border-color 0.2s;}
+.fi::placeholder{color:rgba(255,255,255,0.2);}
+.fi:focus{border-color:var(--orange);}
+
+.regalo-box{background:rgba(255,215,0,0.06);border:1px solid rgba(255,215,0,0.15);border-radius:12px;padding:0.85rem 1rem;margin-bottom:1rem;display:flex;gap:0.6rem;align-items:flex-start;}
+.regalo-icon{font-size:1.2rem;flex-shrink:0;}
+.regalo-title{font-size:0.7rem;font-weight:700;color:var(--yellow);margin-bottom:0.2rem;text-transform:uppercase;letter-spacing:0.05em;}
+.regalo-items{font-size:0.68rem;color:rgba(255,255,255,0.5);line-height:1.5;}
+
+.fsub{width:100%;padding:1rem;background:linear-gradient(135deg,var(--orange) 0%,var(--pink) 100%);color:var(--white);border:none;border-radius:100px;font-family:var(--fb);font-size:0.95rem;font-weight:700;cursor:pointer;transition:opacity 0.2s,transform 0.2s;letter-spacing:0.02em;}
+.fsub:hover{opacity:0.9;transform:translateY(-2px);}
+.fnota{font-size:0.65rem;color:rgba(255,255,255,0.22);text-align:center;margin-top:0.6rem;line-height:1.5;}
+
+/* SUCCESS */
+.success{display:none;text-align:center;padding:1.5rem 0;}
+.si{font-size:3.5rem;margin-bottom:0.75rem;}
+.st{font-family:var(--fd);font-size:1.6rem;font-weight:700;margin-bottom:0.6rem;}
+.ss{font-size:0.85rem;color:rgba(255,255,255,0.55);line-height:1.7;margin-bottom:1.25rem;}
+.sb{display:inline-block;background:var(--orange);color:var(--white);padding:0.75rem 1.75rem;border-radius:100px;font-weight:700;font-size:0.88rem;text-decoration:none;}
+
+/* PATROCINADORES */
+.patros{background:rgba(255,255,255,0.03);border-top:1px solid rgba(255,255,255,0.06);padding:2rem 5rem;}
+.patros-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;}
+.patros-label{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.25);}
+.patros-items{display:flex;align-items:center;gap:2rem;flex-wrap:wrap;}
+.patros-item{font-size:0.82rem;font-weight:600;color:rgba(255,255,255,0.4);}
+.patros-item.aje{color:var(--orange);}
+.patros-item.abanca{color:rgba(255,255,255,0.6);}
+.patros-item.caracas{color:var(--pink-bright);}
+
+footer{padding:1.25rem 2rem;border-top:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between;}
+.fl-logo{font-family:var(--fd);font-size:0.9rem;font-weight:700;color:var(--orange);}
+.fl-copy{font-size:0.65rem;color:rgba(255,255,255,0.18);}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding:2.5rem 1.5rem;min-height:auto;gap:2.5rem;}
+  .aprende-grid{grid-template-columns:1fr 1fr;}
+  .patros{padding:1.5rem;}
+  footer{flex-direction:column;gap:0.5rem;text-align:center;padding:1.25rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-back">← vanessacid.com</a>
+  <a href="index.html" class="nav-logo">vanessa cid</a>
+</nav>
+
+<div class="hero">
+  <div class="glow-pink"></div>
+  <div class="glow-orange"></div>
+
+  <div class="hero-left">
+    <div class="aprende-strip">
+      <span class="strip-word orange">APRENDE</span>
+      <span class="strip-dot">·</span>
+      <span class="strip-word pink">CONECTA</span>
+      <span class="strip-dot">·</span>
+      <span class="strip-word yellow">AYUDA</span>
+    </div>
+
+    <h1 class="h-title">Instagram<br>para<br><span class="negocios">negocios</span></h1>
+    <div class="h-subtitle">que no tienen tiempo que perder</div>
+
+    <p class="h-desc">3 HORAS PRÁCTICAS PARA <strong>VENDER MÁS</strong><br>Y AHORRAR TIEMPO CON INSTAGRAM.</p>
+
+    <div class="detalles-list">
+      <div class="det-row">
+        <div class="det-icon">📅</div>
+        <div><span class="det-label">MARTES </span><span class="det-sub">21 DE JULIO DE 2026</span></div>
+      </div>
+      <div class="det-row">
+        <div class="det-icon">🕙</div>
+        <div><span class="det-label">10:00 A 13:30 H</span></div>
+      </div>
+      <div class="det-row">
+        <div class="det-icon">📍</div>
+        <div><span class="det-label">SEDE PRINCIPAL DE ABANCA VIGO · </span><span class="det-sub">ABANCA INNOVA</span></div>
+      </div>
+      <div class="det-row">
+        <div class="det-icon">☕</div>
+        <div><span class="det-label">COFFEE BREAK INCLUIDO</span></div>
+      </div>
+      <div class="det-row">
+        <div class="det-icon">🤝</div>
+        <div><span class="det-label">EVENTO GRATUITO MEDIANTE </span><span class="det-sub">DONACIÓN SOLIDARIA</span></div>
+      </div>
+    </div>
+
+    <p style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:0.75rem;">EN ESTE TALLER APRENDERÁS A:</p>
+    <div class="aprende-grid">
+      <div class="ap"><div class="ap-icon">🎯</div><div class="ap-txt">Optimiza tu perfil para atraer clientes</div></div>
+      <div class="ap"><div class="ap-icon">🎬</div><div class="ap-txt">Crea contenido que vende</div></div>
+      <div class="ap"><div class="ap-icon">🤖</div><div class="ap-txt">Usa IA para ahorrar tiempo</div></div>
+      <div class="ap"><div class="ap-icon">📋</div><div class="ap-txt">Sal con tu plan de contenidos hecho</div></div>
+    </div>
+
+    <div class="solidaridad">
+      <div class="sol-heart">❤️</div>
+      <div>
+        <div class="sol-title">Evento solidario por Venezuela</div>
+        <div class="sol-txt">Tu aportación se destinará íntegramente a la campaña solidaria impulsada por ABANCA para apoyar a las personas afectadas por los terremotos en Venezuela.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORMULARIO -->
+  <div>
+    <div class="form-card">
+      <div class="plazas-badge"><div class="pdot"></div>Plazas limitadas</div>
+      <div class="form-title">Reserva tu plaza<br>gratuita</div>
+      <p class="form-sub">
+        <span class="hl">Martes 21 de julio</span> · <span class="hl">10:00h</span> · Sede ABANCA Vigo
+      </p>
+
+      <form id="registroForm">
+        <div class="fg">
+          <label class="fl">Nombre completo *</label>
+          <div class="fi-w"><span class="fi-i">👤</span><input type="text" class="fi" placeholder="Tu nombre y apellidos" required id="nombre"></div>
+        </div>
+        <div class="fg">
+          <label class="fl">Instagram de tu negocio</label>
+          <div class="fi-w"><span class="fi-i">📷</span><input type="text" class="fi" placeholder="@tunegocio" id="instagram"></div>
+        </div>
+        <div class="fg">
+          <label class="fl">Email *</label>
+          <div class="fi-w"><span class="fi-i">✉️</span><input type="email" class="fi" placeholder="tu@email.com" required id="email"></div>
+        </div>
+        <div class="fg">
+          <label class="fl">Móvil *</label>
+          <div class="fi-w"><span class="fi-i">📱</span><input type="tel" class="fi" placeholder="+34 600 000 000" required id="movil"></div>
+        </div>
+
+        <div class="regalo-box">
+          <div class="regalo-icon">🎁</div>
+          <div>
+            <div class="regalo-title">Por tu donación, como agradecimiento:</div>
+            <div class="regalo-items">📖 Recibirás la guía práctica de Instagram para negocios en formato digital — completamente gratis</div>
+          </div>
+        </div>
+
+        <button type="submit" class="fsub">🎟️ RESERVAR MI PLAZA GRATUITA →</button>
+        <p class="fnota">Gratuito. Recibirás confirmación por email. Plazas limitadas.</p>
+      </form>
+
+      <div class="success" id="formSuccess">
+        <div class="si">🎉</div>
+        <div class="st">¡Plaza reservada!</div>
+        <p class="ss">Recibirás la confirmación por email. Nos vemos el <strong>martes 21 de julio</strong> en la Sede ABANCA Vigo. ¡Prepárate!</p>
+        <a href="index.html" class="sb">Volver al inicio</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PATROCINADORES -->
+<div class="patros">
+  <div class="patros-inner">
+    <div>
+      <div class="patros-label">Organiza</div>
+      <div class="patros-item" style="color:var(--orange);">Vanessa Cid</div>
+    </div>
+    <div>
+      <div class="patros-label">Con el apoyo de</div>
+      <div class="patros-item aje">AJE Vigo &amp; // ABANCA Innova</div>
+    </div>
+    <div>
+      <div class="patros-label">Empresa colaboradora</div>
+      <div class="patros-item caracas">Caracas Bakery</div>
+    </div>
+    <div>
+      <div class="patros-label">Ponente</div>
+      <div class="patros-item" style="color:rgba(255,255,255,0.5);">Vanessa Cid · Marketing + IA para negocios</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" style="font-size:0.7rem;color:rgba(255,255,255,0.25);text-decoration:none;">← vanessacid.com</a>
+  <div class="fl-logo">vanessa cid</div>
+  <p class="fl-copy">© 2026 Vanessa Cid · Marketing & IA para negocios</p>
+</footer>
+
+<script>
+document.getElementById('registroForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const data = {
+    nombre: document.getElementById('nombre').value,
+    instagram: document.getElementById('instagram').value,
+    email: document.getElementById('email').value,
+    movil: document.getElementById('movil').value,
+    fecha: new Date().toLocaleString('es-ES')
+  };
+
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxvD1MsF6ZmVpv93cxvJUd-OQ1bl0rtBnV1MnJ_3ZFyuWLOpri8rbmFAEQpJwwvFSPM3Q/exec';
+
+  if (SCRIPT_URL !== 'AQUI_VA_TU_URL_DE_GOOGLE_APPS_SCRIPT') {
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data)
+    });
+  }
+
+  document.getElementById('registroForm').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+});
+</script>
+</body>
+</html>

@@ -1588,5 +1588,37 @@ document.querySelectorAll('.plan-card').forEach(function(card) {
   }
 });
 </script>
+<!-- POPUP TALLER -->
+<div id="popup-taller" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(18,0,42,0.88);z-index:9999;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(8px);">
+  <div style="background:#12002a;border-radius:24px;max-width:460px;width:100%;padding:2.5rem;position:relative;border:1px solid rgba(224,64,160,0.3);box-shadow:0 24px 80px rgba(0,0,0,0.6);">
+    <button onclick="cerrarPopup()" style="position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,0.08);border:none;color:rgba(255,255,255,0.6);width:32px;height:32px;border-radius:50%;font-size:1rem;cursor:pointer;line-height:1;">&#x2715;</button>
+    <p style="color:#e040a0;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin:0 0 10px;">Taller presencial &middot; Vigo &middot; Gratuito</p>
+    <h2 style="color:#ffffff;font-size:28px;font-weight:900;line-height:1.05;margin:0 0 8px;font-family:Georgia,serif;">Instagram para <span style="color:#E8622A;">negocios</span></h2>
+    <p style="color:#ffffff;font-size:13px;font-style:italic;background:#E8622A;display:inline-block;padding:4px 14px;border-radius:5px;margin:0 0 20px;">que no tienen tiempo que perder</p>
+    <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px 18px;margin-bottom:18px;">
+      <p style="color:#ffffff;font-size:14px;font-weight:700;margin:0 0 6px;">Martes 21 de julio de 2026</p>
+      <p style="color:rgba(255,255,255,0.6);font-size:13px;margin:0 0 4px;">10:00 a 13:30h &middot; Sede ABANCA Vigo</p>
+      <p style="color:rgba(255,255,255,0.6);font-size:13px;margin:0;">Coffee break incluido a cargo de Caracas Bakery</p>
+    </div>
+    <p style="color:rgba(255,255,255,0.55);font-size:13px;line-height:1.6;margin:0 0 22px;">3 horas practicas para <strong style="color:#ffffff;">vender mas y ahorrar tiempo</strong> con Instagram. Entrada gratuita con donacion solidaria por Venezuela.</p>
+    <a href="taller-instagram.html" style="display:block;text-align:center;background:linear-gradient(135deg,#E8622A,#C8326B);color:#ffffff;padding:14px 24px;border-radius:100px;font-weight:700;font-size:15px;text-decoration:none;margin-bottom:10px;">Inscribirme gratis</a>
+    <button onclick="cerrarPopup()" style="display:block;width:100%;text-align:center;background:transparent;border:none;color:rgba(255,255,255,0.3);font-size:12px;cursor:pointer;padding:8px;">Ahora no, gracias</button>
+  </div>
+</div>
+<script>
+function cerrarPopup() {
+  document.getElementById('popup-taller').style.display = 'none';
+  sessionStorage.setItem('popupCerrado','1');
+}
+window.addEventListener('load', function() {
+  if (!sessionStorage.getItem('popupCerrado')) {
+    setTimeout(function() {
+      document.getElementById('popup-taller').style.display = 'flex';
+    }, 2000);
+  }
+});
+</script>
+<!-- FIN POPUP -->
+
 </body>
 </html>

@@ -589,8 +589,8 @@ body {
   </div>
 
   <div class="share-btns">
-    <button class="btn-share-wa" onclick="shareWhatsApp()">
-      <span>💬</span> Compartir por WhatsApp
+    <button class="btn-share-wa" onclick="shareEmail()" style="background:var(--mag);">
+      <span>✉️</span> Enviar por correo
     </button>
     <button class="btn-secondary" onclick="copyResult()" id="copy-btn">
       📋 Copiar resultado
@@ -726,9 +726,26 @@ function getResultText() {
   return `He auditado el perfil ${handle} durante el Taller de Instagram con Vanessa Cid.\n\n📊 Resultado: ${pct}/10\n${label}\n\nPrioridades de mejora:\n${imps}\n\n🎯 vanessacid.com`;
 }
 
-function shareWhatsApp() {
-  const text = encodeURIComponent(getResultText());
-  window.open(`https://wa.me/?text=${text}`, '_blank');
+function shareEmail() {
+  const pct = parseFloat(document.getElementById('score-number').textContent);
+  const label = document.getElementById('score-label').textContent;
+  const imps = Array.from(document.querySelectorAll('#improvements-list .result-text')).map(el => '• ' + el.textContent).join('\n');
+  const pos  = Array.from(document.querySelectorAll('#positives-list .result-text')).map(el => '✔ ' + el.textContent).join('\n');
+
+  const subject = encodeURIComponent('Tu auditoría de perfil de Instagram · Taller Vanessa Cid');
+  const body = encodeURIComponent(
+    'Hola,\n\nAquí tienes el resultado de tu auditoría de perfil de Instagram realizada durante el Taller de Vanessa Cid.\n\n' +
+    '👤 Perfil analizado: ' + handle + '\n' +
+    '📊 Puntuación: ' + pct + '/10\n' +
+    '📝 ' + label + '\n\n' +
+    '✅ Lo hace muy bien:\n' + pos + '\n\n' +
+    '🔧 Prioridades de mejora:\n' + imps + '\n\n' +
+    '💡 Tu perfil ya tiene un punto de partida. Ahora toca convertirlo en un vendedor 24/7.\n\n' +
+    '---\n' +
+    'Creado durante el Taller de Instagram · vanessacid.com\n' +
+    '@soyvanessacid'
+  );
+  window.location.href = `mailto:?subject=${subject}&body=${body}`;
 }
 
 function copyResult() {

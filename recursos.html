@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Recursos del Taller · Vanessa Cid</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --mag: #C8326B;
+  --nar: #E8622A;
+  --dk:  #111111;
+  --mid: #3A3A3A;
+  --soft: #777;
+  --cream: #F7F6F3;
+  --line: #E8E8E8;
+  --mag-l: #FAECF2;
+  --nar-l: #FEF0E8;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html { height:100%; }
+body {
+  font-family:'Inter',system-ui,sans-serif;
+  background:#fff;
+  max-width:430px;
+  margin:0 auto;
+  color:var(--dk);
+  min-height:100vh;
+  padding-bottom:48px;
+}
+
+/* ── HERO ── */
+.hero {
+  background:linear-gradient(135deg, var(--mag), var(--nar));
+  padding:52px 28px 40px;
+  text-align:center;
+}
+.hero-icon { font-size:52px; margin-bottom:16px; line-height:1; }
+.hero h1 {
+  font-size:26px; font-weight:900; color:#fff;
+  line-height:1.05; letter-spacing:-0.03em; margin-bottom:10px;
+}
+.hero p { font-size:15px; color:rgba(255,255,255,0.8); line-height:1.5; font-weight:500; }
+.hero-badge {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(255,255,255,0.2); color:#fff;
+  padding:7px 14px; border-radius:100px;
+  font-size:13px; font-weight:700;
+  margin-bottom:16px;
+}
+
+/* ── SECTION LABEL ── */
+.section-label {
+  padding:24px 20px 10px;
+  font-size:12px; font-weight:700;
+  color:var(--soft); letter-spacing:0.1em;
+  text-transform:uppercase;
+}
+
+/* ── RESOURCE CARD ── */
+.res-card {
+  margin:0 20px 12px;
+  border-radius:18px; overflow:hidden;
+  border:1.5px solid var(--line);
+}
+
+/* Guide card */
+.guide-card {
+  background:linear-gradient(135deg, var(--dk), #2a2a2a);
+  border-radius:18px; margin:0 20px 12px;
+  padding:28px 24px; overflow:hidden;
+  position:relative;
+}
+.guide-card::before {
+  content:'📖';
+  position:absolute; right:20px; top:20px;
+  font-size:48px; opacity:0.2;
+}
+.guide-label {
+  font-size:12px; font-weight:700; color:rgba(255,255,255,0.5);
+  text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px;
+}
+.guide-title {
+  font-size:20px; font-weight:900; color:#fff;
+  line-height:1.1; letter-spacing:-0.02em; margin-bottom:8px;
+  max-width:260px;
+}
+.guide-desc {
+  font-size:14px; color:rgba(255,255,255,0.65);
+  line-height:1.5; margin-bottom:20px;
+}
+.guide-chapters {
+  display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;
+}
+.guide-chip {
+  background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.7);
+  padding:5px 10px; border-radius:100px;
+  font-size:12px; font-weight:600;
+}
+.btn-download {
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  width:100%; padding:18px;
+  background:var(--mag); color:#fff;
+  border:none; border-radius:14px;
+  font-size:16px; font-weight:800;
+  font-family:'Inter',system-ui;
+  text-decoration:none; text-align:center;
+  -webkit-appearance:none;
+  transition:opacity 0.2s;
+}
+.btn-download:active { opacity:0.88; }
+
+/* GPT card */
+.gpt-card {
+  background:linear-gradient(135deg, #7C3AED, #5B21B6);
+  border-radius:18px; margin:0 20px 12px;
+  padding:24px;
+}
+.gpt-label {
+  font-size:12px; font-weight:700; color:rgba(255,255,255,0.5);
+  text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px;
+}
+.gpt-title {
+  font-size:19px; font-weight:900; color:#fff;
+  line-height:1.1; letter-spacing:-0.02em; margin-bottom:8px;
+}
+.gpt-desc {
+  font-size:14px; color:rgba(255,255,255,0.7);
+  line-height:1.5; margin-bottom:18px;
+}
+.btn-gpt {
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  width:100%; padding:16px;
+  background:rgba(255,255,255,0.15); color:#fff;
+  border:1.5px solid rgba(255,255,255,0.3);
+  border-radius:12px;
+  font-size:15px; font-weight:700;
+  font-family:'Inter',system-ui;
+  text-decoration:none; text-align:center;
+  -webkit-appearance:none;
+}
+.btn-gpt:active { background:rgba(255,255,255,0.25); }
+
+/* Prompt cards */
+.prompt-card {
+  margin:0 20px 10px;
+  background:var(--cream); border-radius:16px;
+  overflow:hidden; border:1.5px solid var(--line);
+}
+.prompt-header {
+  padding:16px 18px;
+  display:flex; align-items:center; gap:12px;
+  cursor:pointer;
+}
+.prompt-emoji { font-size:24px; flex-shrink:0; }
+.prompt-meta { flex:1; }
+.prompt-name { font-size:16px; font-weight:800; color:var(--dk); margin-bottom:2px; }
+.prompt-when { font-size:12px; color:var(--soft); font-weight:500; }
+.prompt-toggle {
+  font-size:16px; color:var(--soft); flex-shrink:0;
+  transition:transform 0.2s;
+}
+.prompt-toggle.open { transform:rotate(180deg); }
+
+.prompt-body { display:none; padding:0 18px 18px; }
+.prompt-body.open { display:block; }
+
+.prompt-text {
+  background:#fff; border:1.5px solid var(--line);
+  border-radius:10px; padding:14px;
+  font-size:13px; font-weight:500; color:var(--mid);
+  line-height:1.7; margin-bottom:10px;
+  white-space:pre-wrap;
+}
+.prompt-var { color:var(--mag); font-weight:700; }
+
+.prompt-example {
+  background:var(--mag-l); border-radius:10px;
+  padding:12px; margin-bottom:12px;
+}
+.prompt-example-label {
+  font-size:11px; font-weight:700; color:var(--mag);
+  text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px;
+}
+.prompt-example-text {
+  font-size:12px; color:var(--mid); line-height:1.6; font-weight:500;
+}
+
+.prompt-actions { display:flex; gap:8px; }
+.copy-btn {
+  flex:1; padding:12px;
+  background:var(--dk); color:#fff;
+  border:none; border-radius:10px;
+  font-size:13px; font-weight:700;
+  font-family:'Inter',system-ui; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; gap:6px;
+  transition:background 0.2s; -webkit-appearance:none;
+}
+.copy-btn.copied { background:var(--mag); }
+.open-ai-btn {
+  padding:12px 14px;
+  background:var(--cream); color:var(--dk);
+  border:1.5px solid var(--line); border-radius:10px;
+  font-size:13px; font-weight:700;
+  font-family:'Inter',system-ui; cursor:pointer;
+  text-decoration:none; display:flex; align-items:center;
+  white-space:nowrap; -webkit-appearance:none;
+}
+
+/* Tips */
+.tips-card {
+  margin:0 20px 12px;
+  background:var(--dk); border-radius:16px; padding:20px;
+}
+.tips-title {
+  font-size:12px; font-weight:700; color:rgba(255,255,255,0.4);
+  text-transform:uppercase; letter-spacing:0.1em; margin-bottom:14px;
+}
+.tip-item {
+  display:flex; align-items:flex-start; gap:10px;
+  padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.07);
+}
+.tip-item:last-child { border-bottom:none; }
+.tip-icon { font-size:16px; flex-shrink:0; }
+.tip-text { font-size:13px; color:rgba(255,255,255,0.65); line-height:1.5; }
+
+/* Tools */
+.tools-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0 20px 12px; }
+.tool-card {
+  background:var(--cream); border-radius:14px;
+  padding:16px; text-decoration:none;
+  border:1.5px solid var(--line);
+  display:flex; flex-direction:column; gap:6px;
+  transition:background 0.15s;
+}
+.tool-card:active { background:var(--mag-l); border-color:var(--mag); }
+.tool-icon { font-size:28px; }
+.tool-name { font-size:14px; font-weight:800; color:var(--dk); }
+.tool-desc { font-size:12px; color:var(--soft); font-weight:500; }
+
+/* Footer */
+.footer {
+  text-align:center; padding:24px 20px 0;
+  border-top:1px solid var(--line); margin:20px 0 0;
+}
+.footer-logo { font-size:15px; font-weight:800; color:var(--mag); margin-bottom:4px; }
+.footer-handle { font-size:13px; color:var(--soft); font-weight:600; }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-badge">🎁 Taller Instagram · Vanessa Cid</div>
+  <div class="hero-icon">✨</div>
+  <h1>Todos tus recursos en un sitio</h1>
+  <p>Guía completa · Prompts · Asistente de IA · Herramientas</p>
+</div>
+
+<!-- ── GUÍA ── -->
+<div class="section-label">📖 La guía</div>
+<div class="guide-card">
+  <div class="guide-label">Descarga gratuita</div>
+  <div class="guide-title">Instagram para Negocios que No Tienen Tiempo que Perder</div>
+  <div class="guide-desc">11 capítulos con todo lo que no hemos podido ver hoy. Para profundizar a tu ritmo.</div>
+  <div class="guide-chapters">
+    <span class="guide-chip">Perfil</span>
+    <span class="guide-chip">Contenido</span>
+    <span class="guide-chip">Reels</span>
+    <span class="guide-chip">Stories</span>
+    <span class="guide-chip">SEO</span>
+    <span class="guide-chip">IA</span>
+    <span class="guide-chip">Métricas</span>
+    <span class="guide-chip">Plan 30 días</span>
+  </div>
+  <a href="https://drive.google.com/uc?export=download&id=1oG9Bc0OxmdQgYNuTQRyiQR7Bci9lVRWI" class="btn-download">
+    📥 Descargar guía gratis
+  </a>
+</div>
+
+<!-- ── GPT ── -->
+<div class="section-label">🤖 Asistente de IA</div>
+<div class="gpt-card">
+  <div class="gpt-label">Tu regalo de hoy</div>
+  <div class="gpt-title">Asistente de Contenido<br>Vanessa Cid</div>
+  <div class="gpt-desc">Un GPT entrenado para generar ideas de contenido para tu negocio. Dile qué haces y te da ideas en segundos.</div>
+  <a href="https://chatgpt.com/g/g-6a5e161469348191b780c97f09f5cc5e-asistente-de-contenido-vanessa-cid" target="_blank" class="btn-gpt">
+    🚀 Abrir asistente →
+  </a>
+</div>
+
+<!-- ── PROMPTS ── -->
+<div class="section-label">💬 Los 8 prompts del taller</div>
+
+<div class="prompt-card">
+  <div class="prompt-header" onclick="toggle(this)">
+    <div class="prompt-emoji">🎯</div>
+    <div class="prompt-meta"><div class="prompt-name">El prompt base</div><div class="prompt-when">Para empezar cualquier conversación</div></div>
+    <div class="prompt-toggle">▾</div>
+  </div>
+  <div class="prompt-body">
+    <div class="prompt-text" id="p1">"Actúa como experto en marketing para pequeños negocios. Mi negocio es <span class="prompt-var">[tipo de negocio]</span> en <span class="prompt-var">[ciudad]</span>. Mi cliente ideal es <span class="prompt-var">[descripción]</span>. Necesito <span class="prompt-var">[ideas / caption / hook]</span>. Tono: cercano, directo y sin tecnicismos."</div>
+    <div class="prompt-example"><div class="prompt-example-label">Ejemplo</div><div class="prompt-example-text">"...Mi negocio es una clínica de fisioterapia deportiva en Vigo. Mi cliente ideal son deportistas de 25-45 años. Necesito 5 ideas de contenido para Instagram."</div></div>
+    <div class="prompt-actions">
+      <button class="copy-btn" onclick="cp('p1',this)">📋 Copiar</button>
+      <a href="https://chatgpt.com" target="_blank" class="open-ai-btn">ChatGPT →</a>
+    </div>
+  </div>
+</div>
+
+<div class="prompt-card">
+  <div class="prompt-header" onclick="toggle(this)">
+    <div class="prompt-emoji">💡</div>
+    <div class="prompt-meta"><div class="prompt-name">Ideas de contenido</div><div class="prompt-when">Cuando no sabes qué publicar</div></div>
+    <div class="prompt-toggle">▾</div>
+  </div>
+  <div class="prompt-body">
+    <div class="prompt-text" id="p2">"Dame 10 ideas de contenido para Instagram para un negocio de <span class="prompt-var">[tipo]</span>. Objetivo: <span class="prompt-var">[atraer / confiar / vender]</span>. Para cada idea incluye: formato (Reel, carrusel o Story), tema y frase de gancho para empezar."</div>
+    <div class="prompt-example"><div class="prompt-example-label">Ejemplo</div><div class="prompt-example-text">"Dame 10 ideas de contenido para una peluquería. Objetivo: generar confianza. Para cada idea: formato, tema y frase de gancho."</div></div>
+    <div class="prompt-actions">
+      <button class="copy-btn" onclick="cp('p2',this)">📋 Copiar</button>
+      <a href="https://chatgpt.com" target="_blank" class="open-ai-btn">ChatGPT →</a>
+    </div>
+  </div>
+</div>
+
+<div class="prompt-card">
+  <div class="prompt-header" onclick="toggle(this)">
+    <div class="prompt-emoji">🎣</div>
+    <div class="prompt-meta"><div class="prompt-name">Hooks para Reels</div><div class="prompt-when">Para los primeros 3 segundos</div></div>
+    <div class="prompt-toggle">▾</div>
+  </div>
+  <div class="prompt-body">
+    <div class="prompt-text" id="p3">"Escríbeme 10 frases de gancho para el inicio de un Reel sobre <span class="prompt-var">[tema]</span> para <span class="prompt-var">[tipo de cliente]</span>. Deben generar curiosidad o identificación en menos de 5 segundos. Que suenen naturales, no como publicidad."</div>
+    <div class="prompt-example"><div class="prompt-example-label">Ejemplo</div><div class="prompt-example-text">"10 frases de gancho para un Reel sobre errores al elegir colchón para personas con dolor de espalda. Naturales, no como publicidad."</div></div>
+    <div class="prompt-actions">
+      <button class="copy-btn" onclick="cp('p3',this)">📋 Copiar</button>
+      <a href="https://chatgpt.com" target="_blank" class="open-ai-btn">ChatGPT →</a>
+    </div>
+  </div>
+</div>
+
+<div class="prompt-card">
+  <div class="prompt-header" onclick="toggle(this)">
+    <div class="prompt-emoji">📝</div>
+    <div class="prompt-meta"><div class="prompt-name">Caption para publicación</div><div class="prompt-when">El texto de cualquier post</div></div>
+    <div class="prompt-toggle">▾</div>
+  </div>
+  <div class="prompt-body">
+    <div class="prompt-text" id="p4">"Escríbeme el caption para un post de Instagram sobre <span class="prompt-var">[tema]</span>. Objetivo: <span class="prompt-var">[objetivo]</span>. Negocio: <span class="prompt-var">[tipo]</span>. Incluye: apertura que enganche, desarrollo en 3-4 frases cortas y CTA al final. Tono cercano y directo. Sin emojis exagerados."</div>
+    <div class="prompt-example"><div class="prompt-example-label">Ejemplo</div><div class="prompt-example-text">"Caption sobre cómo preparamos pedidos. Objetivo: confianza. Negocio: tienda de ropa online. Apertura, desarrollo y CTA. Tono cercano."</div></div>
+    <div class="prompt-actions">
+      <button class="copy-btn" onclick="cp('p4',this)">📋 Copiar</button>
+      <a href="https://chatgpt.com" target="_blank" class="open-ai-btn">ChatGPT →</a>
+    </div>
+  </div>
+</div>
+
+<div class="prompt-card">
+  <div class="prompt-header" onclick="toggle(this)">
+    <div class="prompt-emoji">🎬</div>
+    <div class="prompt-meta"><div class="prompt-name">Guión de Reel</div><div class="prompt-when">Exactamente qué decir en vídeo</div></div>
+    <div class="prompt-toggle">▾</div>
+  </div>
+  <div class="prompt-body">
+    <div class="prompt-text" id="p5">"Guión completo para un Reel de 30-45 segundos sobre <span class="prompt-var">[tema]</span>. Estructura: gancho (3 seg), desarrollo en 3 puntos, CTA final. Negocio: <span class="prompt-var">[tipo]</span>. Tono natural, como si hablara con un amigo."</div>
+    <div class="prompt-example"><div class="prompt-example-label">Ejemplo</div><div class="prompt-example-text">"Guión de Reel de 30-45 seg sobre 3 errores que veo en mis pacientes antes de hacer deporte. Clínica de fisioterapia. Tono natural."</div></div>
+    <div class="prompt-actions">
+      <button class="copy-btn" onclick="cp('p5',this)">📋 Copiar</button>
+      <a href="https://chatgpt.com" target="_blank" class="open-ai-btn">ChatGPT →</a>
+    </div>
+  </div>
+</div>
+
+<div class="prompt-card">
+  <div class="prompt-header" onclick="toggle(this)">
+    <div class="prompt-emoji">🖼️</div>
+    <div class="prompt-meta"><div class="prompt-name">Estructura de carrusel</div><div class="prompt-when">Cada slide planificada antes de diseñar</div></div>
+    <div class="prompt-toggle">▾</div>
+  </div>
+  <div class="prompt-body">
+    <div class="prompt-text" id="p6">"Crea la estructura de un carrusel de 7 slides sobre <span class="prompt-var">[tema]</span>. Para cada slide: título principal y texto de apoyo (máx 2 líneas). Slide 1 muy impactante. Slide final con CTA. Negocio: <span class="prompt-var">[tipo]</span>."</div>
+    <div class="prompt-example"><div class="prompt-example-label">Ejemplo</div><div class="prompt-example-text">"Carrusel de 7 slides: 5 señales de que necesitas un fisioterapeuta. Slide 1 impactante, slide 7 con CTA para pedir cita."</div></div>
+    <div class="prompt-actions">
+      <button class="copy-btn" onclick="cp('p6',this)">📋 Copiar</button>
+      <a href="https://chatgpt.com" target="_blank" class="open-ai-btn">ChatGPT →</a>
+    </div>
+  </div>
+</div>
+
+<div class="prompt-card">
+  <div class="prompt-header" onclick="toggle(this)">
+    <div class="prompt-emoji">📱</div>
+    <div class="prompt-meta"><div class="prompt-name">Secuencia de Stories</div><div class="prompt-when">5 Stories que convierten</div></div>
+    <div class="prompt-toggle">▾</div>
+  </div>
+  <div class="prompt-body">
+    <div class="prompt-text" id="p7">"Crea una secuencia de 5 Stories para <span class="prompt-var">[objetivo]</span>. Negocio: <span class="prompt-var">[tipo]</span>. Estructura: Story 1 gancho, Stories 2-3 valor, Story 4 prueba social, Story 5 CTA directo. Escribe el texto de cada una."</div>
+    <div class="prompt-example"><div class="prompt-example-label">Ejemplo</div><div class="prompt-example-text">"5 Stories para conseguir reservas en una cafetería. Story 1 gancho, 2-3 valor, 4 cliente satisfecho, 5 CTA para reservar."</div></div>
+    <div class="prompt-actions">
+      <button class="copy-btn" onclick="cp('p7',this)">📋 Copiar</button>
+      <a href="https://chatgpt.com" target="_blank" class="open-ai-btn">ChatGPT →</a>
+    </div>
+  </div>
+</div>
+
+<div class="prompt-card">
+  <div class="prompt-header" onclick="toggle(this)">
+    <div class="prompt-emoji">✍️</div>
+    <div class="prompt-meta"><div class="prompt-name">Mejorar la bio</div><div class="prompt-when">Bio que vende en 3 segundos</div></div>
+    <div class="prompt-toggle">▾</div>
+  </div>
+  <div class="prompt-body">
+    <div class="prompt-text" id="p8">"Mi bio actual: <span class="prompt-var">[tu bio]</span>. Negocio: <span class="prompt-var">[descripción]</span>. Cliente ideal: <span class="prompt-var">[descripción]</span>. Reescríbela para que en 3 segundos se entienda qué hago, para quién, qué consiguen y qué hacer ahora. Máx 150 caracteres. Sin frases vagas."</div>
+    <div class="prompt-example"><div class="prompt-example-label">Ejemplo</div><div class="prompt-example-text">"Bio actual: 'Apasionada del yoga ✨'. Negocio: clases de yoga para mujeres ocupadas. Reescríbela en máx 150 caracteres con CTA."</div></div>
+    <div class="prompt-actions">
+      <button class="copy-btn" onclick="cp('p8',this)">📋 Copiar</button>
+      <a href="https://chatgpt.com" target="_blank" class="open-ai-btn">ChatGPT →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── TIPS ── -->
+<div class="section-label" style="margin-top:8px;">💡 Cómo usar los prompts</div>
+<div class="tips-card">
+  <div class="tip-item"><div class="tip-icon">✏️</div><div class="tip-text">Sustituye lo que está entre corchetes por los datos reales de tu negocio.</div></div>
+  <div class="tip-item"><div class="tip-icon">🔄</div><div class="tip-text">Si no te convence, añade: "Hazlo más corto" o "Cambia el tono a más informal".</div></div>
+  <div class="tip-item"><div class="tip-icon">✍️</div><div class="tip-text">Nunca copies el resultado tal cual. Añade tu voz y un detalle real tuyo.</div></div>
+  <div class="tip-item"><div class="tip-icon">💡</div><div class="tip-text">La IA elimina el papel en blanco. Tú le das la personalidad.</div></div>
+</div>
+
+<!-- ── HERRAMIENTAS ── -->
+<div class="section-label" style="margin-top:8px;">🛠️ Herramientas del taller</div>
+<div class="tools-grid">
+  <a href="/auditoria" class="tool-card">
+    <div class="tool-icon">🔍</div>
+    <div class="tool-name">Auditoría</div>
+    <div class="tool-desc">Analiza cualquier perfil en 3 min</div>
+  </a>
+  <a href="/brujula" class="tool-card">
+    <div class="tool-icon">🧭</div>
+    <div class="tool-name">Brújula</div>
+    <div class="tool-desc">Tu estrategia personalizada</div>
+  </a>
+  <a href="https://chatgpt.com/g/g-6a5e161469348191b780c97f09f5cc5e-asistente-de-contenido-vanessa-cid" target="_blank" class="tool-card">
+    <div class="tool-icon">🤖</div>
+    <div class="tool-name">GPT Vanessa</div>
+    <div class="tool-desc">Ideas de contenido al instante</div>
+  </a>
+  <a href="https://drive.google.com/uc?export=download&id=1oG9Bc0OxmdQgYNuTQRyiQR7Bci9lVRWI" class="tool-card">
+    <div class="tool-icon">📖</div>
+    <div class="tool-name">La guía</div>
+    <div class="tool-desc">Descarga el PDF completo</div>
+  </a>
+</div>
+
+<!-- ── FOOTER ── -->
+<div class="footer">
+  <div class="footer-logo">vanessacid.com</div>
+  <div class="footer-handle">@soyvanessacid</div>
+</div>
+
+<script>
+function toggle(header) {
+  const body = header.nextElementSibling;
+  const icon = header.querySelector('.prompt-toggle');
+  const isOpen = body.classList.contains('open');
+  document.querySelectorAll('.prompt-body').forEach(b=>b.classList.remove('open'));
+  document.querySelectorAll('.prompt-toggle').forEach(t=>t.classList.remove('open'));
+  if (!isOpen) {
+    body.classList.add('open');
+    icon.classList.add('open');
+    setTimeout(()=>header.scrollIntoView({behavior:'smooth',block:'start'}),100);
+  }
+}
+
+function cp(id, btn) {
+  const el = document.getElementById(id);
+  const text = el.innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='✓ Copiado';
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.innerHTML='📋 Copiar';btn.classList.remove('copied');},2000);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');
+    ta.value=text; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    btn.textContent='✓ Copiado'; btn.classList.add('copied');
+    setTimeout(()=>{btn.innerHTML='📋 Copiar';btn.classList.remove('copied');},2000);
+  });
+}
+</script>
+</body>
+</html>

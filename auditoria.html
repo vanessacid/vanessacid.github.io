@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Auditoría de Perfil · Vanessa Cid</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --mag: #C8326B;
+  --nar: #E8622A;
+  --dk:  #111111;
+  --mid: #3A3A3A;
+  --soft: #777777;
+  --cream: #F7F6F3;
+  --line: #E8E8E8;
+  --mag-l: #FAECF2;
+  --nar-l: #FEF0E8;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+html { height:100%; }
+
+body {
+  font-family:'Inter',system-ui,sans-serif;
+  background:#fff;
+  min-height:100%;
+  max-width:430px;
+  margin:0 auto;
+  color:var(--dk);
+  overflow-x:hidden;
+}
+
+/* ── PROGRESS BAR ── */
+.progress-wrap {
+  position:fixed; top:0; left:0; right:0;
+  max-width:430px; margin:0 auto;
+  height:4px; background:var(--line);
+  z-index:100;
+}
+.progress-fill {
+  height:100%;
+  background:linear-gradient(90deg, var(--mag), var(--nar));
+  transition:width 0.4s ease;
+  border-radius:2px;
+}
+
+/* ── HEADER ── */
+.header {
+  padding:20px 24px 0;
+  display:flex; align-items:center; justify-content:space-between;
+  margin-top:4px;
+}
+.logo {
+  font-size:14px; font-weight:700; color:var(--mag);
+  letter-spacing:-0.01em;
+}
+.step-count {
+  font-size:13px; font-weight:600; color:var(--soft);
+}
+
+/* ── SCREEN ── */
+.screen {
+  display:none;
+  min-height:100vh;
+  flex-direction:column;
+  padding:0 0 40px;
+  animation:fadeIn 0.3s ease;
+}
+.screen.active { display:flex; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+
+/* ── INTRO SCREEN ── */
+.intro-hero {
+  background:linear-gradient(135deg, var(--mag), var(--nar));
+  padding:56px 28px 48px;
+  text-align:center;
+}
+.intro-hero h1 {
+  font-size:32px; font-weight:900; color:#fff;
+  line-height:1.05; letter-spacing:-0.03em;
+  margin-bottom:16px;
+}
+.intro-hero p {
+  font-size:17px; color:rgba(255,255,255,0.85);
+  line-height:1.5; font-weight:500;
+}
+.intro-body { padding:32px 24px; }
+.intro-body p {
+  font-size:17px; color:var(--mid); line-height:1.6;
+  margin-bottom:24px;
+}
+.time-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--mag-l); color:var(--mag);
+  padding:10px 18px; border-radius:100px;
+  font-size:15px; font-weight:700;
+  margin-bottom:32px;
+}
+
+/* ── INPUT ── */
+.input-group {
+  margin-bottom:20px;
+}
+.input-group label {
+  display:block;
+  font-size:14px; font-weight:700;
+  color:var(--soft); letter-spacing:0.04em;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.input-group input {
+  width:100%;
+  padding:16px 18px;
+  border:2px solid var(--line);
+  border-radius:14px;
+  font-size:17px; font-weight:500;
+  font-family:'Inter',system-ui;
+  color:var(--dk);
+  background:#fff;
+  transition:border-color 0.2s;
+  -webkit-appearance:none;
+}
+.input-group input:focus {
+  outline:none;
+  border-color:var(--mag);
+}
+.input-group input::placeholder { color:#bbb; }
+
+/* ── BUTTONS ── */
+.btn-primary {
+  width:100%;
+  padding:20px;
+  background:var(--mag);
+  color:#fff;
+  border:none; border-radius:16px;
+  font-size:18px; font-weight:800;
+  font-family:'Inter',system-ui;
+  cursor:pointer;
+  letter-spacing:-0.01em;
+  transition:transform 0.1s, opacity 0.2s;
+  -webkit-appearance:none;
+}
+.btn-primary:active { transform:scale(0.98); opacity:0.9; }
+
+.btn-secondary {
+  width:100%;
+  padding:18px;
+  background:#fff;
+  color:var(--dk);
+  border:2px solid var(--line);
+  border-radius:16px;
+  font-size:17px; font-weight:700;
+  font-family:'Inter',system-ui;
+  cursor:pointer;
+  transition:all 0.2s;
+  -webkit-appearance:none;
+}
+.btn-secondary:active { background:var(--cream); }
+
+/* ── QUESTION SCREEN ── */
+.question-wrap {
+  flex:1;
+  padding:24px 24px 32px;
+  display:flex; flex-direction:column;
+}
+.question-emoji {
+  font-size:44px;
+  margin-bottom:20px;
+  line-height:1;
+}
+.question-text {
+  font-size:24px; font-weight:800;
+  color:var(--dk); line-height:1.2;
+  letter-spacing:-0.02em;
+  margin-bottom:8px;
+  flex:1;
+}
+.question-sub {
+  font-size:15px; color:var(--soft);
+  line-height:1.5; margin-bottom:32px;
+  font-weight:500;
+}
+
+/* ── ANSWER OPTIONS ── */
+.options { display:flex; flex-direction:column; gap:12px; }
+
+.option-btn {
+  width:100%;
+  padding:20px 22px;
+  background:var(--cream);
+  border:2px solid transparent;
+  border-radius:18px;
+  display:flex; align-items:center; gap:16px;
+  cursor:pointer;
+  transition:all 0.15s;
+  -webkit-appearance:none;
+  text-align:left;
+}
+.option-btn:active {
+  transform:scale(0.98);
+  background:var(--mag-l);
+  border-color:var(--mag);
+}
+.option-emoji {
+  font-size:28px; flex-shrink:0;
+  width:44px; text-align:center;
+}
+.option-label {
+  font-size:18px; font-weight:700;
+  color:var(--dk); line-height:1.2;
+}
+.option-sub {
+  font-size:13px; color:var(--soft);
+  font-weight:500; margin-top:2px;
+}
+
+/* ── RESULT SCREEN ── */
+.result-header {
+  background:linear-gradient(135deg, var(--mag), var(--nar));
+  padding:48px 28px 36px;
+  text-align:center;
+}
+.result-header h2 {
+  font-size:14px; font-weight:700;
+  color:rgba(255,255,255,0.7);
+  letter-spacing:0.1em; text-transform:uppercase;
+  margin-bottom:12px;
+}
+.result-header h1 {
+  font-size:28px; font-weight:900;
+  color:#fff; line-height:1.1;
+  letter-spacing:-0.02em;
+}
+.result-handle {
+  font-size:17px; color:rgba(255,255,255,0.8);
+  margin-top:8px; font-weight:600;
+}
+
+.result-body { padding:28px 24px; }
+
+.result-card {
+  background:var(--cream);
+  border-radius:20px;
+  padding:28px 24px;
+  margin-bottom:16px;
+}
+.result-card h3 {
+  font-size:13px; font-weight:700;
+  color:var(--soft); letter-spacing:0.08em;
+  text-transform:uppercase; margin-bottom:16px;
+}
+.result-item {
+  display:flex; align-items:flex-start; gap:12px;
+  padding:10px 0;
+  border-bottom:1px solid var(--line);
+}
+.result-item:last-child { border-bottom:none; }
+.result-icon { font-size:20px; flex-shrink:0; margin-top:1px; }
+.result-text {
+  font-size:16px; font-weight:600; color:var(--dk);
+  line-height:1.4;
+}
+
+.result-score {
+  background:var(--mag-l);
+  border:2px solid var(--mag);
+  border-radius:20px;
+  padding:28px 24px;
+  text-align:center;
+  margin-bottom:16px;
+}
+.score-number {
+  font-size:72px; font-weight:900;
+  color:var(--mag); line-height:1;
+  letter-spacing:-0.04em;
+}
+.score-label {
+  font-size:16px; font-weight:700;
+  color:var(--mag); margin-top:8px;
+}
+.score-desc {
+  font-size:15px; color:var(--mid);
+  margin-top:12px; line-height:1.5; font-weight:500;
+}
+
+.result-msg {
+  background:var(--dk);
+  border-radius:20px;
+  padding:28px 24px;
+  text-align:center;
+  margin-bottom:24px;
+}
+.result-msg p {
+  font-size:17px; color:rgba(255,255,255,0.9);
+  line-height:1.6; font-weight:500;
+}
+.result-msg strong { color:#fff; }
+
+.share-btns {
+  display:flex; flex-direction:column; gap:12px;
+  padding:0 24px;
+}
+
+.btn-share-wa {
+  width:100%; padding:20px;
+  background:#25D366; color:#fff;
+  border:none; border-radius:16px;
+  font-size:17px; font-weight:800;
+  font-family:'Inter',system-ui;
+  cursor:pointer; display:flex;
+  align-items:center; justify-content:center; gap:10px;
+  -webkit-appearance:none;
+}
+.btn-share-wa:active { opacity:0.9; }
+
+.btn-new {
+  width:100%; padding:18px;
+  background:var(--cream); color:var(--dk);
+  border:2px solid var(--line);
+  border-radius:16px;
+  font-size:16px; font-weight:700;
+  font-family:'Inter',system-ui;
+  cursor:pointer;
+  -webkit-appearance:none;
+}
+</style>
+</head>
+<body>
+
+<div class="progress-wrap">
+  <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+  PANTALLA 0 · INTRO
+══════════════════════════════════════ -->
+<div class="screen active" id="screen-intro">
+  <div class="intro-hero">
+    <h1>Auditoría de perfil express</h1>
+    <p>Analiza el Instagram de tu compañero/a como si fueras un cliente nuevo.</p>
+  </div>
+  <div class="intro-body">
+    <div class="time-badge">⏱️ Menos de 3 minutos</div>
+    <p>Abre el perfil de Instagram de la persona que tienes al lado. Responde las preguntas como lo haría alguien que no le conoce de nada.</p>
+    <p style="font-size:15px;color:var(--soft);margin-bottom:28px;">Sin registros. Sin guardar datos. Solo tú, tu móvil y la honestidad.</p>
+
+    <div class="input-group">
+      <label>Usuario de Instagram que analizas</label>
+      <input type="text" id="handle-input" placeholder="@usuario" autocomplete="off" autocorrect="off" autocapitalize="none">
+    </div>
+
+    <div style="margin-bottom:24px;"></div>
+    <button class="btn-primary" onclick="startAudit()">Empezar auditoría →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  PREGUNTAS 1–8
+══════════════════════════════════════ -->
+
+<!-- Q1 -->
+<div class="screen" id="screen-q1">
+  <div class="header"><div class="logo">vanessacid.com</div><div class="step-count" id="step-1">1 de 8</div></div>
+  <div class="question-wrap">
+    <div class="question-emoji">⚡</div>
+    <div class="question-text">¿En menos de 5 segundos entendiste a qué se dedica?</div>
+    <div class="question-sub">Solo con ver la foto, el nombre y el nombre de usuario.</div>
+    <div class="options">
+      <button class="option-btn" onclick="answer(1,'si',3)">
+        <div class="option-emoji">✅</div>
+        <div><div class="option-label">Sí, clarísimo</div><div class="option-sub">Entendí al instante</div></div>
+      </button>
+      <button class="option-btn" onclick="answer(1,'mas_o_menos',1)">
+        <div class="option-emoji">🤔</div>
+        <div><div class="option-label">Más o menos</div><div class="option-sub">Tuve que pensar un poco</div></div>
+      </button>
+      <button class="option-btn" onclick="answer(1,'no',0)">
+        <div class="option-emoji">❌</div>
+        <div><div class="option-label">No, para nada</div><div class="option-sub">No entendí nada</div></div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Q2 -->
+<div class="screen" id="screen-q2">
+  <div class="header"><div class="logo">vanessacid.com</div><div class="step-count">2 de 8</div></div>
+  <div class="question-wrap">
+    <div class="question-emoji">📸</div>
+    <div class="question-text">¿La foto de perfil representa bien al negocio?</div>
+    <div class="question-sub">¿Es clara, reconocible y profesional?</div>
+    <div class="options">
+      <button class="option-btn" onclick="answer(2,'si',2)">
+        <div class="option-emoji">✅</div>
+        <div><div class="option-label">Sí, muy bien</div><div class="option-sub">Encaja perfectamente</div></div>
+      </button>
+      <button class="option-btn" onclick="answer(2,'mejorable',1)">
+        <div class="option-emoji">🤔</div>
+        <div><div class="option-label">Mejorable</div><div class="option-sub">Podría ser más clara</div></div>
+      </button>
+      <button class="option-btn" onclick="answer(2,'no',0)">
+        <div class="option-emoji">❌</div>
+        <div><div class="option-label">No</div><div class="option-sub">No representa bien al negocio</div></div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Q3 -->
+<div class="screen" id="screen-q3">
+  <div class="header"><div class="logo">vanessacid.com</div><div class="step-count">3 de 8</div></div>
+  <div class="question-wrap">
+    <div class="question-emoji">📝</div>
+    <div class="question-text">¿La bio explica qué hace y para quién?</div>
+    <div class="question-sub">Lee la bio completa. ¿Está claro el negocio y su cliente?</div>
+    <div class="options">
+      <button class="option-btn" onclick="answer(3,'si',3)">
+        <div class="option-emoji">✅</div>
+        <div><div class="option-label">Sí, muy clara</div><div class="option-sub">Entiendo qué hace y para quién</div></div>
+      </button>
+      <button class="option-btn" onclick="answer(3,'mas_o_menos',1)">
+        <div class="option-emoji">🤔</div>
+        <div><div class="option-label">Más o menos</div><div class="option-sub">Algo, pero falta claridad</div></div>
+      </button>
+      <button class="option-btn" onclick="answer(3,'no',0)">
+        <div class="option-emoji">❌</div>
+        <div><div class="option-label">No</div><div class="option-sub">La bio no dice nada útil</div></div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Q4 -->
+<div class="screen" id="screen-q4">
+  <div class="header"><div class="logo">vanessacid.com</div><div class="step-count">4 de 8</div></div>
+  <div class="question-wrap">
+    <div class="question-emoji">🎯</div>
+    <div class="question-text">¿Hay una llamada a la acción clara?</div>
+    <div class="question-sub">Un enlace, un "reserva aquí", un "escríbeme"… ¿hay algo que te invite a actuar?</div>
+    <div class="options">
+      <button class="option-btn" onclick="answer(4,'si',2)">
+        <div class="option-emoji">✅</div>
+        <div><div class="option-label">Sí, muy claro</div><div class="option-sub">Sé exactamente qué hacer</div></div>
+      </button>
+      <button class="option-btn" onclick="answer(4,'algo',1)">
+        <div class="option-emoji">🤔</div>
+        <div><div class="option-label">Hay algo</div><div class="option-sub">Pero podría ser más directo</div></div>
+      </button>
+      <button class="option-btn" onclick="answer(4,'no',0)">
+        <div class="option-emoji">❌</div>
+        <div><div class="option-label">No hay nada</div><div class="option-sub">No sé qué se supone que haga</div></div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Q5 -->
+<div class="screen" id="screen-q5">
+  <div class="header"><div class="logo">vanessacid.com</div><div class="step-count">5 de 8</div></div>
+  <div class="question-wrap">
+    <div class="question-emoji">🖼️</div>
+    <div class="question-text">¿El contenido genera confianza?</div>
+    <div class="question-sub">Mira las últimas 6-9 publicaciones. ¿Te da confianza lo que ves?</div>
+    <div class="options">
+      <button class="option-btn" onclick="answer(5,'si',3)">
+        <div class="option-emoji">✅</div>
+        <div><div class="option-label">Sí, mucha</div><div class="option-sub">Me genera confianza y credibilidad</div></div>
+      </button>
+      <button class="option-btn" onclick="answer(5,'algo',1)">
+        <div class="option-emoji">🤔</div>
+        <div><div class="option-label">Algo</div><div class="option-sub">Hay cosas buenas y cosas mejorables</div></div>
+      </button>
+      <button class="option-btn" onclick="answer(5,'no',0)">
+        <div class="option-emoji">❌</div>
+        <div><div class="option-label">No</div><div class="option-sub">No me convence</div></div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Q6 -->
+<div class="screen" id="screen-q6">
+  <div class="header"><div class="logo">vanessacid.com</div><div class="step-count">6 de 8</div></div>
+  <div class="question-wrap">
+    <div class="question-emoji">📅</div>
+    <div class="question-text">¿El perfil parece activo y reciente?</div>
+    <div class="question-sub">¿Publica con regularidad? ¿Las últimas publicaciones son recientes?</div>
+    <div class="options">
+      <button class="option-btn" onclick="answer(6,'si',2)">
+        <div class="option-emoji">✅</div>
+        <div><div class="option-label">Sí</div><div class="option-sub">Publica con frecuencia</div></div>
+      </button>
+      <button class="option-btn" onclick="answer(6,'irregular',1)">
+        <div class="option-emoji">🤔</div>
+        <div><div class="option-label">Irregular</div><div class="option-sub">A veces sí, a veces no</div></div>
+      </button>
+      <button class="option-btn" onclick="answer(6,'no',0)">
+        <div class="option-emoji">❌</div>
+        <div><div class="option-label">No</div><div class="option-sub">Parece abandonado</div></div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Q7 -->
+<div class="screen" id="screen-q7">
+  <div class="header"><div class="logo">vanessacid.com</div><div class="step-count">7 de 8</div></div>
+  <div class="question-wrap">
+    <div class="question-emoji">📞</div>
+    <div class="question-text">¿Sabrías cómo contactar con ellos?</div>
+    <div class="question-sub">Sin buscar en Google. Solo con lo que ves en el perfil.</div>
+    <div class="options">
+      <button class="option-btn" onclick="answer(7,'facil',2)">
+        <div class="option-emoji">✅</div>
+        <div><div class="option-label">Fácil</div><div class="option-sub">Está muy claro cómo contactar</div></div>
+      </button>
+      <button class="option-btn" onclick="answer(7,'con_dificultad',1)">
+        <div class="option-emoji">🤔</div>
+        <div><div class="option-label">Con dificultad</div><div class="option-sub">Habría que buscar un poco</div></div>
+      </button>
+      <button class="option-btn" onclick="answer(7,'no',0)">
+        <div class="option-emoji">❌</div>
+        <div><div class="option-label">No</div><div class="option-sub">No hay forma de contactar</div></div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Q8 -->
+<div class="screen" id="screen-q8">
+  <div class="header"><div class="logo">vanessacid.com</div><div class="step-count">8 de 8</div></div>
+  <div class="question-wrap">
+    <div class="question-emoji">🛒</div>
+    <div class="question-text">Si fueras cliente, ¿qué harías después de ver el perfil?</div>
+    <div class="question-sub">Sé honesto/a. ¿Qué harías en la vida real?</div>
+    <div class="options">
+      <button class="option-btn" onclick="answer(8,'comprar',3)">
+        <div class="option-emoji">💳</div>
+        <div><div class="option-label">Compraría o reservaría</div><div class="option-sub">Me ha convencido del todo</div></div>
+      </button>
+      <button class="option-btn" onclick="answer(8,'escribir',2)">
+        <div class="option-emoji">✍️</div>
+        <div><div class="option-label">Le escribiría</div><div class="option-sub">Me interesa pero quiero más info</div></div>
+      </button>
+      <button class="option-btn" onclick="answer(8,'seguir',1)">
+        <div class="option-emoji">❤️</div>
+        <div><div class="option-label">Lo seguiría</div><div class="option-sub">Me gusta pero sin urgencia</div></div>
+      </button>
+      <button class="option-btn" onclick="answer(8,'irme',0)">
+        <div class="option-emoji">👋</div>
+        <div><div class="option-label">Me iría</div><div class="option-sub">No me ha convencido</div></div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  RESULTADO
+══════════════════════════════════════ -->
+<div class="screen" id="screen-result">
+  <div class="result-header">
+    <h2>Así ve un cliente este perfil</h2>
+    <h1 id="result-handle">@usuario</h1>
+  </div>
+  <div class="result-body">
+
+    <div class="result-score">
+      <div class="score-number" id="score-number">—</div>
+      <div class="score-label" id="score-label">—</div>
+      <div class="score-desc" id="score-desc">—</div>
+    </div>
+
+    <div class="result-card">
+      <h3>✅ Lo hace muy bien</h3>
+      <div id="positives-list"></div>
+    </div>
+
+    <div class="result-card">
+      <h3>🔧 Mejoraría primero</h3>
+      <div id="improvements-list"></div>
+    </div>
+
+    <div class="result-msg">
+      <p><strong>Tu perfil ya tiene un punto de partida.</strong><br>Ahora toca convertirlo en un vendedor 24/7.</p>
+    </div>
+
+  </div>
+
+  <div class="share-btns">
+    <button class="btn-share-wa" onclick="shareWhatsApp()">
+      <span>💬</span> Compartir por WhatsApp
+    </button>
+    <button class="btn-secondary" onclick="copyResult()" id="copy-btn">
+      📋 Copiar resultado
+    </button>
+    <button class="btn-new" onclick="resetAudit()">
+      🔄 Nueva auditoría
+    </button>
+  </div>
+  <div style="height:40px;"></div>
+</div>
+
+<script>
+const answers = {};
+let handle = '';
+let score = 0;
+
+function startAudit() {
+  const input = document.getElementById('handle-input').value.trim();
+  if (!input) {
+    document.getElementById('handle-input').focus();
+    document.getElementById('handle-input').style.borderColor = 'var(--mag)';
+    return;
+  }
+  handle = input.startsWith('@') ? input : '@' + input;
+  showScreen('screen-q1');
+  updateProgress(1);
+}
+
+function answer(q, value, points) {
+  answers[q] = { value, points };
+  const next = q < 8 ? `screen-q${q+1}` : null;
+  updateProgress(q + 1);
+  if (next) {
+    showScreen(next);
+  } else {
+    showResult();
+  }
+}
+
+function updateProgress(step) {
+  const pct = (step / 9) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function showResult() {
+  score = Object.values(answers).reduce((sum, a) => sum + a.points, 0);
+  const maxScore = 20;
+  const pct = Math.round((score / maxScore) * 10 * 10) / 10;
+
+  document.getElementById('result-handle').textContent = handle;
+  document.getElementById('score-number').textContent = pct.toFixed(1);
+
+  let label, desc;
+  if (pct >= 8.5) {
+    label = 'Perfil preparado para convertir';
+    desc = 'Este perfil transmite confianza y claridad. Un cliente nuevo sabe qué hace, para quién y cómo contactar.';
+  } else if (pct >= 7) {
+    label = 'Buena base, con oportunidades claras';
+    desc = 'El perfil funciona pero hay elementos clave que, mejorados, marcarían una gran diferencia.';
+  } else if (pct >= 5) {
+    label = 'El perfil necesita más claridad';
+    desc = 'Hay cosas buenas, pero un cliente nuevo tendría dudas antes de actuar.';
+  } else {
+    label = 'El perfil está perdiendo oportunidades';
+    desc = 'Con algunos cambios concretos, este perfil puede mejorar mucho en poco tiempo.';
+  }
+
+  document.getElementById('score-label').textContent = label;
+  document.getElementById('score-desc').textContent = desc;
+
+  // Positives
+  const positives = [];
+  const improvements = [];
+
+  const a = answers;
+  if (a[1]?.value === 'si')          positives.push('Se entiende inmediatamente a qué se dedica');
+  if (a[2]?.value === 'si')          positives.push('La foto de perfil representa bien al negocio');
+  if (a[3]?.value === 'si')          positives.push('La bio explica claramente qué hace y para quién');
+  if (a[4]?.value === 'si')          positives.push('Hay una llamada a la acción clara');
+  if (a[5]?.value === 'si')          positives.push('El contenido genera confianza');
+  if (a[6]?.value === 'si')          positives.push('El perfil se ve activo y actualizado');
+  if (a[7]?.value === 'facil')       positives.push('Contactar es fácil y directo');
+  if (a[8]?.value === 'comprar' || a[8]?.value === 'escribir') positives.push('Invita a tomar acción');
+
+  if (a[1]?.value !== 'si')         improvements.push('Claridad inmediata: que se entienda el negocio en 3 segundos');
+  if (a[2]?.value !== 'si')         improvements.push('Foto de perfil: más profesional y representativa');
+  if (a[3]?.value !== 'si')         improvements.push('Bio: añadir qué hace, para quién y qué conseguirán');
+  if (a[4]?.value !== 'si')         improvements.push('Llamada a la acción: decirle al cliente qué hacer ahora');
+  if (a[5]?.value !== 'si')         improvements.push('Contenido: más variedad entre valor, confianza y venta');
+  if (a[6]?.value !== 'si')         improvements.push('Consistencia: publicar con más regularidad');
+  if (a[7]?.value !== 'facil')      improvements.push('Contacto: facilitar cómo llegar al negocio');
+
+  const posList = document.getElementById('positives-list');
+  const impList = document.getElementById('improvements-list');
+
+  posList.innerHTML = '';
+  impList.innerHTML = '';
+
+  const top3pos = positives.slice(0, 3);
+  const top3imp = improvements.slice(0, 3);
+
+  if (top3pos.length === 0) {
+    posList.innerHTML = '<div class="result-item"><div class="result-icon">💪</div><div class="result-text">Con los cambios correctos, este perfil puede mejorar mucho</div></div>';
+  } else {
+    top3pos.forEach(p => {
+      posList.innerHTML += `<div class="result-item"><div class="result-icon">✅</div><div class="result-text">${p}</div></div>`;
+    });
+  }
+
+  if (top3imp.length === 0) {
+    impList.innerHTML = '<div class="result-item"><div class="result-icon">🚀</div><div class="result-text">¡Perfil muy sólido! Mantener la constancia es la clave</div></div>';
+  } else {
+    top3imp.forEach(i => {
+      impList.innerHTML += `<div class="result-item"><div class="result-icon">•</div><div class="result-text">${i}</div></div>`;
+    });
+  }
+
+  showScreen('screen-result');
+  updateProgress(9);
+}
+
+function getResultText() {
+  const pct = parseFloat(document.getElementById('score-number').textContent);
+  const label = document.getElementById('score-label').textContent;
+  const imps = Array.from(document.querySelectorAll('#improvements-list .result-text')).map(el => '• ' + el.textContent).join('\n');
+
+  return `He auditado el perfil ${handle} durante el Taller de Instagram con Vanessa Cid.\n\n📊 Resultado: ${pct}/10\n${label}\n\nPrioridades de mejora:\n${imps}\n\n🎯 vanessacid.com`;
+}
+
+function shareWhatsApp() {
+  const text = encodeURIComponent(getResultText());
+  window.open(`https://wa.me/?text=${text}`, '_blank');
+}
+
+function copyResult() {
+  const btn = document.getElementById('copy-btn');
+  navigator.clipboard.writeText(getResultText()).then(() => {
+    btn.textContent = '✅ Copiado';
+    setTimeout(() => { btn.textContent = '📋 Copiar resultado'; }, 2000);
+  }).catch(() => {
+    // fallback
+    const ta = document.createElement('textarea');
+    ta.value = getResultText();
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = '✅ Copiado';
+    setTimeout(() => { btn.textContent = '📋 Copiar resultado'; }, 2000);
+  });
+}
+
+function resetAudit() {
+  Object.keys(answers).forEach(k => delete answers[k]);
+  handle = '';
+  score = 0;
+  document.getElementById('handle-input').value = '';
+  document.getElementById('progress-fill').style.width = '0%';
+  showScreen('screen-intro');
+}
+</script>
+</body>
+</html>

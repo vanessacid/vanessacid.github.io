@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Brújula de Contenido · Vanessa Cid</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root {
+  --mag: #C8326B;
+  --nar: #E8622A;
+  --dk:  #111111;
+  --mid: #3A3A3A;
+  --soft: #777;
+  --cream: #F7F6F3;
+  --line: #E8E8E8;
+  --mag-l: #FAECF2;
+  --nar-l: #FEF0E8;
+
+  /* Profile colors */
+  --p1: #7C3AED; /* Constructor - purple */
+  --p1-l: #F5F3FF;
+  --p2: #E8622A; /* Generador - orange */
+  --p2-l: #FEF0E8;
+  --p3: #2563EB; /* Educador - blue */
+  --p3-l: #EFF6FF;
+  --p4: #16A34A; /* Inspirador - green */
+  --p4-l: #F0FDF4;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html { height:100%; }
+body {
+  font-family:'Inter',system-ui,sans-serif;
+  background:#fff;
+  min-height:100%;
+  max-width:430px;
+  margin:0 auto;
+  color:var(--dk);
+  overflow-x:hidden;
+}
+
+/* ── PROGRESS ── */
+.progress-wrap {
+  position:fixed; top:0; left:0; right:0;
+  max-width:430px; margin:0 auto;
+  height:4px; background:var(--line); z-index:100;
+}
+.progress-fill {
+  height:100%;
+  background:linear-gradient(90deg,var(--mag),var(--nar));
+  transition:width 0.4s ease; border-radius:2px;
+}
+
+/* ── SCREENS ── */
+.screen {
+  display:none; min-height:100vh;
+  flex-direction:column; padding-bottom:48px;
+  animation:fadeUp 0.3s ease;
+}
+.screen.active { display:flex; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+
+/* ── HEADER ── */
+.header {
+  padding:20px 24px 0; margin-top:4px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.logo { font-size:14px; font-weight:700; color:var(--mag); }
+.step-count { font-size:13px; font-weight:600; color:var(--soft); }
+
+/* ── INTRO ── */
+.intro-hero {
+  background:linear-gradient(135deg,var(--mag),var(--nar));
+  padding:56px 28px 48px; text-align:center;
+}
+.intro-hero .compass { font-size:64px; margin-bottom:20px; line-height:1; }
+.intro-hero h1 {
+  font-size:34px; font-weight:900; color:#fff;
+  line-height:1.0; letter-spacing:-0.03em; margin-bottom:14px;
+}
+.intro-hero p { font-size:16px; color:rgba(255,255,255,0.85); line-height:1.5; font-weight:500; }
+.intro-body { padding:32px 24px; }
+.intro-promise {
+  background:var(--cream); border-radius:16px;
+  padding:24px; margin-bottom:28px;
+  border-left:4px solid var(--mag);
+}
+.intro-promise p {
+  font-size:17px; font-weight:700; color:var(--dk);
+  line-height:1.4;
+}
+.intro-promise span { color:var(--mag); }
+.time-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--mag-l); color:var(--mag);
+  padding:10px 18px; border-radius:100px;
+  font-size:15px; font-weight:700; margin-bottom:28px;
+}
+
+/* ── QUESTION ── */
+.question-wrap {
+  flex:1; padding:24px 24px 32px;
+  display:flex; flex-direction:column;
+}
+.question-emoji { font-size:44px; margin-bottom:20px; line-height:1; }
+.question-text {
+  font-size:24px; font-weight:800; color:var(--dk);
+  line-height:1.2; letter-spacing:-0.02em; margin-bottom:8px;
+}
+.question-sub {
+  font-size:15px; color:var(--soft); line-height:1.5;
+  margin-bottom:28px; font-weight:500;
+}
+.options { display:flex; flex-direction:column; gap:10px; }
+.option-btn {
+  width:100%; padding:18px 20px;
+  background:var(--cream); border:2px solid transparent;
+  border-radius:16px; display:flex; align-items:center; gap:14px;
+  cursor:pointer; transition:all 0.15s; text-align:left;
+  -webkit-appearance:none;
+}
+.option-btn:active { transform:scale(0.98); background:var(--mag-l); border-color:var(--mag); }
+.option-emoji { font-size:26px; flex-shrink:0; width:40px; text-align:center; }
+.option-label { font-size:17px; font-weight:700; color:var(--dk); }
+.option-sub { font-size:13px; color:var(--soft); font-weight:500; margin-top:2px; }
+
+/* Scale buttons */
+.scale-wrap { display:flex; gap:8px; margin-top:8px; }
+.scale-btn {
+  flex:1; padding:20px 8px;
+  background:var(--cream); border:2px solid transparent;
+  border-radius:14px; text-align:center;
+  cursor:pointer; font-size:20px; font-weight:800; color:var(--soft);
+  transition:all 0.15s; -webkit-appearance:none;
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+}
+.scale-btn span { font-size:11px; font-weight:600; color:var(--soft); letter-spacing:0.04em; }
+.scale-btn:active { background:var(--mag-l); border-color:var(--mag); color:var(--mag); }
+.scale-btn:active span { color:var(--mag); }
+.scale-labels {
+  display:flex; justify-content:space-between;
+  padding:0 4px; margin-bottom:12px;
+}
+.scale-labels span { font-size:12px; color:var(--soft); font-weight:600; }
+
+/* Yes/No */
+.yn-wrap { display:flex; gap:12px; }
+.yn-btn {
+  flex:1; padding:24px 16px;
+  background:var(--cream); border:2px solid transparent;
+  border-radius:16px; text-align:center;
+  cursor:pointer; -webkit-appearance:none;
+}
+.yn-btn:active { background:var(--mag-l); border-color:var(--mag); }
+.yn-emoji { font-size:36px; display:block; margin-bottom:8px; }
+.yn-label { font-size:18px; font-weight:800; color:var(--dk); }
+
+/* ── LOADING ── */
+.loading-screen {
+  flex:1; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:40px 24px; text-align:center;
+}
+.loading-compass {
+  font-size:72px; margin-bottom:24px;
+  animation:spin 2s linear infinite;
+}
+@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+.loading-text { font-size:20px; font-weight:700; color:var(--dk); margin-bottom:8px; }
+.loading-sub { font-size:15px; color:var(--soft); }
+
+/* ── BUTTONS ── */
+.btn-primary {
+  width:100%; padding:20px;
+  background:var(--mag); color:#fff;
+  border:none; border-radius:16px;
+  font-size:18px; font-weight:800;
+  font-family:'Inter',system-ui; cursor:pointer;
+  letter-spacing:-0.01em; -webkit-appearance:none;
+  transition:opacity 0.2s;
+}
+.btn-primary:active { opacity:0.9; }
+
+/* ── RESULT CARD (shareable) ── */
+#result-card {
+  background:#fff;
+  margin:0;
+}
+
+.result-profile-header {
+  padding:40px 28px 32px;
+  text-align:center;
+}
+.profile-icon { font-size:56px; margin-bottom:16px; line-height:1; }
+.profile-eyebrow {
+  font-size:13px; font-weight:700;
+  letter-spacing:0.1em; text-transform:uppercase;
+  margin-bottom:10px; opacity:0.7;
+}
+.profile-name {
+  font-size:32px; font-weight:900;
+  line-height:1.0; letter-spacing:-0.03em;
+  color:#fff; margin-bottom:12px;
+}
+.profile-desc {
+  font-size:15px; line-height:1.6;
+  color:rgba(255,255,255,0.85); font-weight:500;
+}
+
+.result-body { padding:24px; }
+
+.result-section {
+  background:var(--cream); border-radius:16px;
+  padding:20px; margin-bottom:14px;
+}
+.section-label {
+  font-size:12px; font-weight:700;
+  letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--soft); margin-bottom:14px;
+}
+.priority-row {
+  display:flex; align-items:center; gap:12px;
+  margin-bottom:6px;
+}
+.priority-text {
+  font-size:18px; font-weight:800; color:var(--dk);
+}
+.stars { font-size:18px; letter-spacing:2px; }
+
+/* Donut chart */
+.chart-wrap {
+  display:flex; align-items:center; gap:20px;
+}
+.donut {
+  width:100px; height:100px; flex-shrink:0;
+  border-radius:50%;
+}
+.chart-legend { flex:1; }
+.legend-item {
+  display:flex; align-items:center; gap:8px;
+  margin-bottom:8px;
+}
+.legend-dot {
+  width:10px; height:10px; border-radius:50%; flex-shrink:0;
+}
+.legend-label { font-size:14px; font-weight:600; color:var(--dk); }
+.legend-pct { font-size:14px; font-weight:800; margin-left:auto; }
+
+/* Publish plan */
+.publish-grid {
+  display:flex; gap:8px;
+}
+.publish-item {
+  flex:1; background:#fff; border-radius:12px;
+  padding:14px 10px; text-align:center;
+  border:1.5px solid var(--line);
+}
+.publish-num {
+  font-size:28px; font-weight:900; line-height:1;
+  margin-bottom:4px;
+}
+.publish-label { font-size:12px; font-weight:600; color:var(--soft); }
+
+/* Content list */
+.content-list { display:flex; flex-direction:column; gap:8px; }
+.content-item {
+  display:flex; align-items:flex-start; gap:10px;
+  font-size:15px; font-weight:600; color:var(--dk); line-height:1.3;
+}
+.content-check { flex-shrink:0; margin-top:1px; }
+
+/* Avoid list */
+.avoid-item {
+  display:flex; align-items:flex-start; gap:10px;
+  font-size:15px; font-weight:500; color:var(--soft); line-height:1.3;
+  margin-bottom:8px;
+}
+
+/* AI section */
+.ai-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.ai-col { background:#fff; border-radius:12px; padding:14px; border:1.5px solid var(--line); }
+.ai-col-label {
+  font-size:11px; font-weight:700; color:var(--soft);
+  text-transform:uppercase; letter-spacing:0.06em;
+  margin-bottom:10px;
+}
+.ai-item {
+  font-size:13px; font-weight:600; color:var(--dk);
+  margin-bottom:6px; display:flex; align-items:center; gap:6px;
+}
+
+/* Rhythm */
+.rhythm-section { background:var(--cream); border-radius:16px; padding:20px; margin-bottom:14px; }
+.rhythm-badge {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:6px 14px; border-radius:100px;
+  font-size:13px; font-weight:700; margin-bottom:14px;
+  background:#DCFCE7; color:#16A34A;
+}
+.rhythm-items { display:flex; flex-direction:column; gap:8px; }
+.rhythm-item {
+  display:flex; align-items:center; gap:10px;
+  font-size:15px; font-weight:600; color:var(--dk);
+}
+
+/* First challenge */
+.challenge-card {
+  border-radius:16px; padding:20px; margin-bottom:14px;
+  border:2px solid;
+}
+.challenge-title {
+  font-size:13px; font-weight:700; letter-spacing:0.08em;
+  text-transform:uppercase; margin-bottom:10px;
+}
+.challenge-text {
+  font-size:16px; font-weight:700; color:var(--dk); line-height:1.4;
+}
+
+/* Footer brand */
+.result-footer {
+  padding:20px 24px;
+  display:flex; align-items:center; justify-content:space-between;
+  border-top:1px solid var(--line);
+}
+.result-footer-logo { font-size:14px; font-weight:800; color:var(--mag); }
+.result-footer-handle { font-size:13px; font-weight:600; color:var(--soft); }
+
+/* ── SHARE BUTTONS ── */
+.share-section { padding:0 24px 8px; }
+.share-section h3 {
+  font-size:13px; font-weight:700; color:var(--soft);
+  text-transform:uppercase; letter-spacing:0.08em;
+  margin-bottom:14px; text-align:center;
+}
+.share-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
+.share-btn {
+  padding:16px 12px;
+  border:2px solid var(--line); border-radius:14px;
+  background:#fff; cursor:pointer;
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  font-family:'Inter',system-ui; transition:all 0.15s;
+  -webkit-appearance:none;
+}
+.share-btn:active { background:var(--cream); border-color:var(--mag); }
+.share-btn-icon { font-size:24px; }
+.share-btn-label { font-size:13px; font-weight:700; color:var(--dk); }
+.btn-new {
+  width:100%; padding:16px;
+  background:var(--cream); color:var(--dk);
+  border:2px solid var(--line); border-radius:14px;
+  font-size:15px; font-weight:700;
+  font-family:'Inter',system-ui; cursor:pointer;
+  -webkit-appearance:none;
+}
+</style>
+</head>
+<body>
+
+<div class="progress-wrap">
+  <div class="progress-fill" id="prog" style="width:0%"></div>
+</div>
+
+<!-- ══════════════ INTRO ══════════════ -->
+<div class="screen active" id="s-intro">
+  <div class="intro-hero">
+    <div class="compass">🧭</div>
+    <h1>Brújula de Contenido</h1>
+    <p>Descubre en qué deberías centrar tus esfuerzos en Instagram según tu negocio.</p>
+  </div>
+  <div class="intro-body">
+    <div class="time-badge">⚡ 2 minutos · 8 preguntas</div>
+    <div class="intro-promise">
+      <p>No recibirás un calendario igual para todos.<br>Recibirás <span>tu estrategia personalizada.</span></p>
+    </div>
+    <button class="btn-primary" onclick="go('s-q1');prog(1)">Descubrir mi estrategia →</button>
+  </div>
+</div>
+
+<!-- ══════════════ Q1 · NEGOCIO ══════════════ -->
+<div class="screen" id="s-q1">
+  <div class="header"><div class="logo">vanessacid.com</div><div class="step-count">1 / 8</div></div>
+  <div class="question-wrap">
+    <div class="question-emoji">🏪</div>
+    <div class="question-text">¿A qué se dedica tu negocio?</div>
+    <div class="question-sub">Elige el que más se parezca al tuyo.</div>
+    <div class="options">
+      <button class="option-btn" onclick="ans('negocio','hosteleria');go('s-q2');prog(2)"><div class="option-emoji">☕</div><div><div class="option-label">Restauración / Hostelería</div></div></button>
+      <button class="option-btn" onclick="ans('negocio','tienda_fisica');go('s-q2');prog(2)"><div class="option-emoji">🛍️</div><div><div class="option-label">Tienda física</div></div></button>
+      <button class="option-btn" onclick="ans('negocio','tienda_online');go('s-q2');prog(2)"><div class="option-emoji">📦</div><div><div class="option-label">Tienda online</div></div></button>
+      <button class="option-btn" onclick="ans('negocio','servicios');go('s-q2');prog(2)"><div class="option-emoji">💼</div><div><div class="option-label">Servicios profesionales</div></div></button>
+      <button class="option-btn" onclick="ans('negocio','salud');go('s-q2');prog(2)"><div class="option-emoji">💆</div><div><div class="option-label">Salud y bienestar</div></div></button>
+      <button class="option-btn" onclick="ans('negocio','belleza');go('s-q2');prog(2)"><div class="option-emoji">💇</div><div><div class="option-label">Belleza y estética</div></div></button>
+      <button class="option-btn" onclick="ans('negocio','formacion');go('s-q2');prog(2)"><div class="option-emoji">📚</div><div><div class="option-label">Formación / Educación</div></div></button>
+      <button class="option-btn" onclick="ans('negocio','inmobiliaria');go('s-q2');prog(2)"><div class="option-emoji">🏠</div><div><div class="option-label">Inmobiliaria</div></div></button>
+      <button class="option-btn" onclick="ans('negocio','otro');go('s-q2');prog(2)"><div class="option-emoji">✨</div><div><div class="option-label">Otro</div></div></button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ Q2 · TIEMPO ══════════════ -->
+<div class="screen" id="s-q2">
+  <div class="header"><div class="logo">vanessacid.com</div><div class="step-count">2 / 8</div></div>
+  <div class="question-wrap">
+    <div class="question-emoji">⏱️</div>
+    <div class="question-text">¿Cuántas horas reales puedes dedicar a Instagram cada semana?</div>
+    <div class="question-sub">Sé honesto/a. Esto determina tu ritmo sostenible.</div>
+    <div class="options">
+      <button class="option-btn" onclick="ans('tiempo','30min');go('s-q3');prog(3)"><div class="option-emoji">⚡</div><div><div class="option-label">30 minutos</div><div class="option-sub">Muy poco tiempo disponible</div></div></button>
+      <button class="option-btn" onclick="ans('tiempo','1h');go('s-q3');prog(3)"><div class="option-emoji">🕐</div><div><div class="option-label">1 hora</div><div class="option-sub">Tiempo justo pero constante</div></div></button>
+      <button class="option-btn" onclick="ans('tiempo','2h');go('s-q3');prog(3)"><div class="option-emoji">🕑</div><div><div class="option-label">2 horas</div><div class="option-sub">Puedo dedicarle tiempo real</div></div></button>
+      <button class="option-btn" onclick="ans('tiempo','3h+');go('s-q3');prog(3)"><div class="option-emoji">💪</div><div><div class="option-label">Más de 3 horas</div><div class="option-sub">Instagram es una prioridad</div></div></button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ Q3 · OBJETIVO ══════════════ -->
+<div class="screen" id="s-q3">
+  <div class="header"><div class="logo">vanessacid.com</div><div class="step-count">3 / 8</div></div>
+  <div class="question-wrap">
+    <div class="question-emoji">🎯</div>
+    <div class="question-text">¿Cuál es tu objetivo principal?</div>
+    <div class="question-sub">Solo uno. El más importante ahora mismo.</div>
+    <div class="options">
+      <button class="option-btn" onclick="ans('objetivo','clientes');go('s-q4');prog(4)"><div class="option-emoji">🤝</div><div><div class="option-label">Conseguir clientes</div></div></button>
+      <button class="option-btn" onclick="ans('objetivo','reservas');go('s-q4');prog(4)"><div class="option-emoji">📅</div><div><div class="option-label">Conseguir reservas</div></div></button>
+      <button class="option-btn" onclick="ans('objetivo','ventas_online');go('s-q4');prog(4)"><div class="option-emoji">🛒</div><div><div class="option-label">Vender online</div></div></button>
+      <button class="option-btn" onclick="ans('objetivo','visibilidad');go('s-q4');prog(4)"><div class="option-emoji">📢</div><div><div class="option-label">Conseguir visibilidad</div></div></button>
+      <button class="option-btn" onclick="ans('objetivo','marca_personal');go('s-q4');prog(4)"><div class="option-emoji">⭐</div><div><div class="option-label">Crear marca personal</div></div></button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ Q4 · SOLO ══════════════ -->
+<div class="screen" id="s-q4">
+  <div class="header"><div class="logo">vanessacid.com</div><div class="step-count">4 / 8</div></div>
+  <div class="question-wrap">
+    <div class="question-emoji">👤</div>
+    <div class="question-text">¿Trabajas solo/a?</div>
+    <div class="question-sub">Esto afecta a qué puedes delegar y cómo organizar tu contenido.</div>
+    <div class="yn-wrap" style="margin-top:16px;">
+      <button class="yn-btn" onclick="ans('solo','si');go('s-q5');prog(5)">
+        <span class="yn-emoji">🙋</span><div class="yn-label">Sí</div>
+      </button>
+      <button class="yn-btn" onclick="ans('solo','no');go('s-q5');prog(5)">
+        <span class="yn-emoji">👥</span><div class="yn-label">No, tengo equipo</div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ Q5 · DIFICULTAD ══════════════ -->
+<div class="screen" id="s-q5">
+  <div class="header"><div class="logo">vanessacid.com</div><div class="step-count">5 / 8</div></div>
+  <div class="question-wrap">
+    <div class="question-emoji">😅</div>
+    <div class="question-text">¿Qué te cuesta más de Instagram?</div>
+    <div class="question-sub">Tu mayor bloqueo ahora mismo.</div>
+    <div class="options">
+      <button class="option-btn" onclick="ans('dificultad','ideas');go('s-q6');prog(6)"><div class="option-emoji">💡</div><div><div class="option-label">Encontrar ideas</div><div class="option-sub">No sé qué publicar</div></div></button>
+      <button class="option-btn" onclick="ans('dificultad','camara');go('s-q6');prog(6)"><div class="option-emoji">🎥</div><div><div class="option-label">Grabar vídeos</div><div class="option-sub">Me cuesta aparecer en cámara</div></div></button>
+      <button class="option-btn" onclick="ans('dificultad','editar');go('s-q6');prog(6)"><div class="option-emoji">✂️</div><div><div class="option-label">Editar el contenido</div><div class="option-sub">Me lleva demasiado tiempo</div></div></button>
+      <button class="option-btn" onclick="ans('dificultad','escribir');go('s-q6');prog(6)"><div class="option-emoji">✍️</div><div><div class="option-label">Escribir los textos</div><div class="option-sub">Los captions y descripciones</div></div></button>
+      <button class="option-btn" onclick="ans('dificultad','constancia');go('s-q6');prog(6)"><div class="option-emoji">📅</div><div><div class="option-label">Ser constante</div><div class="option-sub">Empiezo pero no mantengo el ritmo</div></div></button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ Q6 · DISFRUTA ══════════════ -->
+<div class="screen" id="s-q6">
+  <div class="header"><div class="logo">vanessacid.com</div><div class="step-count">6 / 8</div></div>
+  <div class="question-wrap">
+    <div class="question-emoji">😊</div>
+    <div class="question-text">¿Qué disfrutas más creando?</div>
+    <div class="question-sub">Tu punto fuerte natural.</div>
+    <div class="options">
+      <button class="option-btn" onclick="ans('disfruta','camara');go('s-q7');prog(7)"><div class="option-emoji">🎙️</div><div><div class="option-label">Hablar a cámara</div></div></button>
+      <button class="option-btn" onclick="ans('disfruta','disenar');go('s-q7');prog(7)"><div class="option-emoji">🎨</div><div><div class="option-label">Diseñar</div></div></button>
+      <button class="option-btn" onclick="ans('disfruta','escribir');go('s-q7');prog(7)"><div class="option-emoji">✍️</div><div><div class="option-label">Escribir</div></div></button>
+      <button class="option-btn" onclick="ans('disfruta','enseniar');go('s-q7');prog(7)"><div class="option-emoji">📖</div><div><div class="option-label">Enseñar y explicar</div></div></button>
+      <button class="option-btn" onclick="ans('disfruta','diadía');go('s-q7');prog(7)"><div class="option-emoji">📸</div><div><div class="option-label">Mostrar el día a día</div></div></button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ Q7 · CONTENIDO ══════════════ -->
+<div class="screen" id="s-q7">
+  <div class="header"><div class="logo">vanessacid.com</div><div class="step-count">7 / 8</div></div>
+  <div class="question-wrap">
+    <div class="question-emoji">📁</div>
+    <div class="question-text">¿Cuánto contenido tienes ya?</div>
+    <div class="question-sub">Fotos, vídeos, materiales que podrías publicar.</div>
+    <div class="options">
+      <button class="option-btn" onclick="ans('contenido','mucho');go('s-q8');prog(8)"><div class="option-emoji">📚</div><div><div class="option-label">Muchísimo</div><div class="option-sub">Tengo más de lo que publico</div></div></button>
+      <button class="option-btn" onclick="ans('contenido','algo');go('s-q8');prog(8)"><div class="option-emoji">📄</div><div><div class="option-label">Algo</div><div class="option-sub">Tengo algunas cosas</div></div></button>
+      <button class="option-btn" onclick="ans('contenido','poco');go('s-q8');prog(8)"><div class="option-emoji">📭</div><div><div class="option-label">Muy poco</div><div class="option-sub">Tengo que crearlo casi todo</div></div></button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ Q8 · CONFIANZA ══════════════ -->
+<div class="screen" id="s-q8">
+  <div class="header"><div class="logo">vanessacid.com</div><div class="step-count">8 / 8</div></div>
+  <div class="question-wrap">
+    <div class="question-emoji">🤝</div>
+    <div class="question-text">¿Tu negocio depende de que el cliente confíe antes de comprar?</div>
+    <div class="question-sub">Del 1 (casi nada) al 5 (totalmente).</div>
+    <div class="scale-labels">
+      <span>Casi nada</span><span>Totalmente</span>
+    </div>
+    <div class="scale-wrap">
+      <button class="scale-btn" onclick="ans('confianza',1);calcProfile();prog(9)">1</button>
+      <button class="scale-btn" onclick="ans('confianza',2);calcProfile();prog(9)">2</button>
+      <button class="scale-btn" onclick="ans('confianza',3);calcProfile();prog(9)">3</button>
+      <button class="scale-btn" onclick="ans('confianza',4);calcProfile();prog(9)">4</button>
+      <button class="scale-btn" onclick="ans('confianza',5);calcProfile();prog(9)">5</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ LOADING ══════════════ -->
+<div class="screen" id="s-loading">
+  <div class="loading-screen">
+    <div class="loading-compass">🧭</div>
+    <div class="loading-text">Analizando tu negocio…</div>
+    <div class="loading-sub">Preparando tu estrategia personalizada</div>
+  </div>
+</div>
+
+<!-- ══════════════ RESULT ══════════════ -->
+<div class="screen" id="s-result">
+
+  <!-- SHAREABLE CARD -->
+  <div id="result-card">
+
+    <!-- Profile header - color set by JS -->
+    <div class="result-profile-header" id="profile-header">
+      <div class="profile-icon" id="profile-icon">🧭</div>
+      <div class="profile-eyebrow" id="profile-eyebrow">Tu perfil estratégico</div>
+      <div class="profile-name" id="profile-name">—</div>
+      <div class="profile-desc" id="profile-desc">—</div>
+    </div>
+
+    <div class="result-body">
+
+      <!-- Priority -->
+      <div class="result-section">
+        <div class="section-label">⭐ Tu prioridad debe ser</div>
+        <div class="priority-row">
+          <div class="stars" id="priority-stars">★★★★★</div>
+        </div>
+        <div class="priority-text" id="priority-text">—</div>
+      </div>
+
+      <!-- Mix -->
+      <div class="result-section">
+        <div class="section-label">📊 Distribuye tu tiempo así</div>
+        <div class="chart-wrap">
+          <canvas class="donut" id="donut-chart" width="100" height="100"></canvas>
+          <div class="chart-legend" id="chart-legend"></div>
+        </div>
+      </div>
+
+      <!-- Weekly plan -->
+      <div class="result-section">
+        <div class="section-label">📅 Publica esto cada semana</div>
+        <div class="publish-grid" id="publish-grid"></div>
+      </div>
+
+      <!-- What to publish -->
+      <div class="result-section">
+        <div class="section-label">✅ Contenido que más hará crecer tu negocio</div>
+        <div class="content-list" id="content-list"></div>
+      </div>
+
+      <!-- Avoid -->
+      <div class="result-section">
+        <div class="section-label">❌ No pierdas tiempo en…</div>
+        <div id="avoid-list"></div>
+      </div>
+
+      <!-- Rhythm -->
+      <div class="rhythm-section">
+        <div class="section-label">🟢 Tu ritmo sostenible</div>
+        <div class="rhythm-badge">🟢 Muy sostenible todo el año</div>
+        <div class="rhythm-items" id="rhythm-items"></div>
+      </div>
+
+      <!-- IA -->
+      <div class="result-section">
+        <div class="section-label">🤖 Qué delegar en IA</div>
+        <div class="ai-grid">
+          <div class="ai-col">
+            <div class="ai-col-label">✅ Delega esto</div>
+            <div id="ai-do"></div>
+          </div>
+          <div class="ai-col">
+            <div class="ai-col-label">❌ No delegar</div>
+            <div id="ai-dont"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- First challenge -->
+      <div class="challenge-card" id="challenge-card">
+        <div class="challenge-title" id="challenge-title">🚀 Tu primer reto esta semana</div>
+        <div class="challenge-text" id="challenge-text">—</div>
+      </div>
+
+      <!-- Footer brand -->
+      <div class="result-footer">
+        <div class="result-footer-logo">vanessacid.com</div>
+        <div class="result-footer-handle">@soyvanessacid</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SHARE BUTTONS -->
+  <div class="share-section">
+    <h3>Guarda o comparte tu estrategia</h3>
+    <div class="share-grid">
+      <button class="share-btn" onclick="downloadPDF()">
+        <div class="share-btn-icon">📄</div>
+        <div class="share-btn-label">Descargar PDF</div>
+      </button>
+      <button class="share-btn" onclick="saveImage()">
+        <div class="share-btn-icon">🖼️</div>
+        <div class="share-btn-label">Guardar imagen</div>
+      </button>
+      <button class="share-btn" onclick="sendEmail()">
+        <div class="share-btn-icon">✉️</div>
+        <div class="share-btn-label">Enviar por correo</div>
+      </button>
+      <button class="share-btn" onclick="shareWA()">
+        <div class="share-btn-icon">💬</div>
+        <div class="share-btn-label">WhatsApp</div>
+      </button>
+    </div>
+    <button class="btn-new" onclick="resetAll()">🔄 Nueva brújula</button>
+  </div>
+
+</div>
+
+<script>
+const d = {}; // answers store
+
+function ans(k, v) { d[k] = v; }
+function prog(step) {
+  document.getElementById('prog').style.width = (step/9*100)+'%';
+}
+function go(id) {
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ── PROFILES ───────────────────────────────────────────────────
+
+const PROFILES = {
+  constructor: {
+    id: 'constructor',
+    icon: '🟣',
+    eyebrow: 'Tu perfil estratégico',
+    name: 'El Constructor\nde Confianza',
+    desc: 'Tu negocio vende porque las personas confían en ti. Antes de comprar necesitan verte, conocerte y creer en ti. Tu prioridad es generar credibilidad.',
+    color: '#7C3AED',
+    colorLight: '#F5F3FF',
+    priority: 'Generar confianza y credibilidad',
+    mix: [{label:'Stories',pct:35,color:'#7C3AED'},{label:'Carruseles',pct:30,color:'#A78BFA'},{label:'Reels',pct:25,color:'#DDD6FE'},{label:'Posts',pct:10,color:'#EDE9FE'}],
+    content: ['Detrás de cámaras de tu trabajo diario','Casos reales y resultados de clientes','Responder dudas frecuentes de tú sector','Testimonios y reseñas auténticas','Explicar tu proceso paso a paso'],
+    avoid: ['Publicar todos los días si no tienes nada relevante','Seguir tendencias que no encajan con tu sector','Centrarte solo en el producto — muestra a la persona'],
+    rhythm: {
+      items: ['2 publicaciones semanales (carrusel + reel)','Stories mínimo 3 días a la semana','Responder todos los mensajes directos'],
+      plus: 'Añade un Reel semanal adicional',
+      minus: '1 publicación + Stories 2 días'
+    },
+    aiDo: ['Ideas de contenido','Redactar captions','Hooks para Reels','Respuestas a FAQs'],
+    aiDont: ['Grabarte a cámara','Responder DMs','Mostrar tu proceso real','Crear la relación'],
+    challenge: 'Esta semana graba un vídeo de 60 segundos mostrando cómo trabajas. Sin editar demasiado. Auténtico.',
+    challengeColor: '#7C3AED'
+  },
+  generador: {
+    id: 'generador',
+    icon: '🟠',
+    eyebrow: 'Tu perfil estratégico',
+    name: 'El Generador\nde Demanda',
+    desc: 'Tu negocio necesita captar atención constantemente y convertirla en acción. Los Reels y los ganchos son tu motor de crecimiento.',
+    color: '#E8622A',
+    colorLight: '#FEF0E8',
+    priority: 'Captar atención y generar demanda',
+    mix: [{label:'Reels',pct:45,color:'#E8622A'},{label:'Stories',pct:30,color:'#FB923C'},{label:'Carruseles',pct:15,color:'#FED7AA'},{label:'Posts',pct:10,color:'#FFEDD5'}],
+    content: ['Reels visuales de tu producto o servicio','Transformaciones y resultados impactantes','Ofertas y novedades con urgencia real','Contenido con sonido y movimiento','POV y storytelling corto'],
+    avoid: ['Publicar solo fotos estáticas','Textos largos sin imagen de impacto','Contenido sin llamada a la acción clara'],
+    rhythm: {
+      items: ['3 Reels semanales (lunes, miércoles, viernes)','Stories diarias con llamada a la acción','1 carrusel cada 2 semanas'],
+      plus: 'Añade un Reel extra y colaboraciones',
+      minus: '2 Reels + Stories 3 días a la semana'
+    },
+    aiDo: ['Ideas de Reels','Hooks de apertura','Copys de Stories','Calendarios de contenido'],
+    aiDont: ['Grabar el producto','Crear la urgencia real','Responder comentarios','Mostrar tu negocio real'],
+    challenge: 'Esta semana graba un Reel en menos de 2 horas. No tiene que ser perfecto. Solo publicarlo.',
+    challengeColor: '#E8622A'
+  },
+  educador: {
+    id: 'educador',
+    icon: '🔵',
+    eyebrow: 'Tu perfil estratégico',
+    name: 'El Educador',
+    desc: 'Tu mayor ventaja es el conocimiento. Cuando enseñas, generas autoridad. Los carruseles y vídeos explicativos tendrán más impacto que seguir tendencias.',
+    color: '#2563EB',
+    colorLight: '#EFF6FF',
+    priority: 'Posicionarte como referente en tu sector',
+    mix: [{label:'Carruseles',pct:40,color:'#2563EB'},{label:'Reels',pct:30,color:'#60A5FA'},{label:'Stories',pct:20,color:'#BFDBFE'},{label:'Posts',pct:10,color:'#DBEAFE'}],
+    content: ['Carruseles educativos tipo "Guía de…"','Errores comunes de tus clientes','Explicaciones sencillas de conceptos complejos','Comparativas y mitos vs realidad','Pasos para conseguir algo concreto'],
+    avoid: ['Reels sin propósito educativo','Contenido muy visual sin fondo','Publicar solo para estar presente'],
+    rhythm: {
+      items: ['2 carruseles semanales con alto valor','1 Reel explicativo semanal','Stories 3-4 días con tips rápidos'],
+      plus: 'Añade un directo mensual o mini tutorial',
+      minus: '1 carrusel + Stories 2 días a la semana'
+    },
+    aiDo: ['Esquemas de carruseles','Ideas de temas','Redactar slides','Titles y hooks'],
+    aiDont: ['Tu perspectiva y experiencia','Ejemplos reales propios','Responder preguntas específicas','Tu voz como experto/a'],
+    challenge: 'Esta semana crea un carrusel con el error más frecuente que cometen tus clientes y cómo evitarlo.',
+    challengeColor: '#2563EB'
+  },
+  inspirador: {
+    id: 'inspirador',
+    icon: '🟢',
+    eyebrow: 'Tu perfil estratégico',
+    name: 'El Inspirador\nVisual',
+    desc: 'Tu producto entra por los ojos. Antes de decidir, tu cliente necesita imaginarse viviendo lo que ofreces. La estética y la experiencia son tu mayor arma.',
+    color: '#16A34A',
+    colorLight: '#F0FDF4',
+    priority: 'Crear deseo a través de la imagen y la experiencia',
+    mix: [{label:'Reels',pct:40,color:'#16A34A'},{label:'Stories',pct:30,color:'#4ADE80'},{label:'Carruseles',pct:20,color:'#BBF7D0'},{label:'Posts',pct:10,color:'#DCFCE7'}],
+    content: ['Vídeos del producto o espacio en movimiento','Experiencias de clientes reales','Detrás de cámaras del proceso creativo','ASMR o contenido sensorial','Estética y ambiente del negocio'],
+    avoid: ['Contenido con demasiado texto','Reels con poca calidad visual','Mezclar estilos estéticos sin coherencia'],
+    rhythm: {
+      items: ['3 Reels o vídeos semanales','Stories diarias con contenido visual','1 carrusel estético quincenal'],
+      plus: 'Colaboraciones con fotógrafos o creadores',
+      minus: '2 piezas visuales + Stories 3 días'
+    },
+    aiDo: ['Ideas de contenido estético','Captions y descripiones','Planificación de temas','Hashtags estratégicos'],
+    aiDont: ['Crear las imágenes reales','Capturar la experiencia','Responder comentarios','Mostrar tu estilo propio'],
+    challenge: 'Esta semana graba 60 segundos de tu producto o espacio con buena luz y sin hablar. Solo imagen y sonido.',
+    challengeColor: '#16A34A'
+  }
+};
+
+// ── PROFILE CALCULATION ─────────────────────────────────────────
+
+function calcProfile() {
+  go('s-loading');
+  setTimeout(() => {
+    const profile = determineProfile();
+    buildResult(PROFILES[profile]);
+    go('s-result');
+  }, 2000);
+}
+
+function determineProfile() {
+  const negocio = d.negocio;
+  const objetivo = d.objetivo;
+  const confianza = d.confianza || 3;
+  const disfruta = d.disfruta;
+
+  // High-trust industries → constructor
+  if (['salud','inmobiliaria','servicios'].includes(negocio) && confianza >= 4) return 'constructor';
+
+  // Formation/education → educador
+  if (negocio === 'formacion') return 'educador';
+  if (['enseniar','escribir'].includes(disfruta) && objetivo === 'marca_personal') return 'educador';
+
+  // Visual/hospitality → inspirador
+  if (['hosteleria','belleza'].includes(negocio)) return 'inspirador';
+  if (disfruta === 'disenar' && ['tienda_fisica','tienda_online'].includes(negocio)) return 'inspirador';
+
+  // Online shop / demand → generador
+  if (['tienda_online','tienda_fisica'].includes(negocio) && ['ventas_online','visibilidad'].includes(objetivo)) return 'generador';
+  if (objetivo === 'ventas_online') return 'generador';
+
+  // Default by objective
+  if (['clientes','reservas'].includes(objetivo) && confianza >= 4) return 'constructor';
+  if (['visibilidad','ventas_online'].includes(objetivo)) return 'generador';
+
+  return 'constructor';
+}
+
+// ── BUILD RESULT ────────────────────────────────────────────────
+
+function buildResult(p) {
+  // Header
+  document.getElementById('profile-header').style.background = `linear-gradient(135deg, ${p.color}, ${p.color}CC)`;
+  document.getElementById('profile-icon').textContent = p.icon;
+  document.getElementById('profile-eyebrow').textContent = p.eyebrow;
+  document.getElementById('profile-name').textContent = p.name;
+  document.getElementById('profile-desc').textContent = p.desc;
+
+  // Priority
+  document.getElementById('priority-text').textContent = p.priority;
+  document.getElementById('priority-text').style.color = p.color;
+
+  // Donut chart
+  drawDonut(p.mix);
+  buildLegend(p.mix);
+
+  // Publish grid
+  const tiempo = d.tiempo;
+  let reels = '2', carruseles = '1', stories = 'Diarias';
+  if (tiempo === '30min') { reels='1'; carruseles='0'; stories='3 días'; }
+  if (tiempo === '1h')    { reels='2'; carruseles='1'; stories='4 días'; }
+  if (tiempo === '2h')    { reels='2'; carruseles='1'; stories='Diarias'; }
+  if (tiempo === '3h+')   { reels='3'; carruseles='2'; stories='Diarias'; }
+
+  document.getElementById('publish-grid').innerHTML = `
+    <div class="publish-item">
+      <div class="publish-num" style="color:${p.color}">${reels}</div>
+      <div class="publish-label">Reels</div>
+    </div>
+    <div class="publish-item">
+      <div class="publish-num" style="color:${p.color}">${carruseles}</div>
+      <div class="publish-label">Carruseles</div>
+    </div>
+    <div class="publish-item">
+      <div class="publish-num" style="color:${p.color};font-size:16px;padding-top:6px;">${stories}</div>
+      <div class="publish-label">Stories</div>
+    </div>
+  `;
+
+  // Content list
+  document.getElementById('content-list').innerHTML = p.content.map(c=>
+    `<div class="content-item"><span class="content-check" style="color:${p.color}">✔</span>${c}</div>`
+  ).join('');
+
+  // Avoid list
+  document.getElementById('avoid-list').innerHTML = p.avoid.map(a=>
+    `<div class="avoid-item"><span style="color:#EF4444">❌</span>${a}</div>`
+  ).join('');
+
+  // Rhythm
+  document.getElementById('rhythm-items').innerHTML = p.rhythm.items.map(i=>
+    `<div class="rhythm-item"><span style="color:${p.color}">✔</span>${i}</div>`
+  ).join('');
+
+  // AI
+  document.getElementById('ai-do').innerHTML = p.aiDo.map(i=>
+    `<div class="ai-item"><span style="color:#16A34A">✔</span>${i}</div>`
+  ).join('');
+  document.getElementById('ai-dont').innerHTML = p.aiDont.map(i=>
+    `<div class="ai-item"><span style="color:#EF4444">✘</span>${i}</div>`
+  ).join('');
+
+  // Challenge
+  document.getElementById('challenge-card').style.borderColor = p.color;
+  document.getElementById('challenge-card').style.background = p.colorLight;
+  document.getElementById('challenge-title').style.color = p.color;
+  document.getElementById('challenge-text').textContent = p.challenge;
+
+  // Store for sharing
+  window._profileData = p;
+}
+
+function drawDonut(mix) {
+  const canvas = document.getElementById('donut-chart');
+  const ctx = canvas.getContext('2d');
+  let start = -Math.PI/2;
+  ctx.clearRect(0,0,100,100);
+  mix.forEach(m => {
+    const angle = (m.pct/100) * Math.PI * 2;
+    ctx.beginPath();
+    ctx.moveTo(50,50);
+    ctx.arc(50,50,45,start,start+angle);
+    ctx.fillStyle = m.color;
+    ctx.fill();
+    start += angle;
+  });
+  // Hole
+  ctx.beginPath();
+  ctx.arc(50,50,26,0,Math.PI*2);
+  ctx.fillStyle = '#fff';
+  ctx.fill();
+}
+
+function buildLegend(mix) {
+  document.getElementById('chart-legend').innerHTML = mix.map(m=>
+    `<div class="legend-item">
+      <div class="legend-dot" style="background:${m.color}"></div>
+      <div class="legend-label">${m.label}</div>
+      <div class="legend-pct" style="color:${m.color}">${m.pct}%</div>
+    </div>`
+  ).join('');
+}
+
+// ── SHARE ───────────────────────────────────────────────────────
+
+function getShareText() {
+  const p = window._profileData;
+  if (!p) return '';
+  return `🧭 MI BRÚJULA DE CONTENIDO\n\n${p.icon} ${p.name}\n${p.desc}\n\n⭐ Prioridad: ${p.priority}\n\n✅ Contenido clave:\n${p.content.slice(0,3).map(c=>'• '+c).join('\n')}\n\n🚀 Primer reto:\n${p.challenge}\n\n---\nCreado con vanessacid.com · @soyvanessacid`;
+}
+
+function sendEmail() {
+  const p = window._profileData;
+  if (!p) return;
+  const subject = encodeURIComponent('Mi Brújula de Contenido · Taller Instagram Vanessa Cid');
+  const body = encodeURIComponent(
+    'Hola,\n\nAquí tienes mi estrategia de Instagram personalizada generada durante el Taller de Vanessa Cid.\n\n' +
+    getShareText() + '\n\nvanessacid.com'
+  );
+  window.location.href = `mailto:?subject=${subject}&body=${body}`;
+}
+
+function shareWA() {
+  window.open(`https://wa.me/?text=${encodeURIComponent(getShareText())}`, '_blank');
+}
+
+async function downloadPDF() {
+  const { jsPDF } = window.jspdf;
+  const card = document.getElementById('result-card');
+  try {
+    const canvas = await html2canvas(card, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
+    const img = canvas.toDataURL('image/jpeg', 0.95);
+    const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    const w = pdf.internal.pageSize.getWidth();
+    const h = (canvas.height * w) / canvas.width;
+    let y = 0;
+    const pageH = pdf.internal.pageSize.getHeight();
+    while (y < h) {
+      if (y > 0) pdf.addPage();
+      pdf.addImage(img, 'JPEG', 0, -y, w, h);
+      y += pageH;
+    }
+    pdf.save('brujula-contenido-vanessacid.pdf');
+  } catch(e) {
+    alert('Error al generar el PDF. Prueba con "Guardar imagen".');
+  }
+}
+
+async function saveImage() {
+  const card = document.getElementById('result-card');
+  try {
+    const canvas = await html2canvas(card, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
+    const link = document.createElement('a');
+    link.download = 'brujula-contenido-vanessacid.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  } catch(e) {
+    alert('Haz una captura de pantalla para guardar tu estrategia.');
+  }
+}
+
+function resetAll() {
+  Object.keys(d).forEach(k=>delete d[k]);
+  document.getElementById('prog').style.width = '0%';
+  go('s-intro');
+}
+</script>
+</body>
+</html>

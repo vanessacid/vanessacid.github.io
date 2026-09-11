@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Vanessa Cid | Marketing & IA para negocios</title>
+<meta name="description" content="Portfolio de Vanessa Cid — Gestion de redes sociales, creacion de contenido, reels y estrategia digital para negocios.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F5F0E8;--pink:#F07BAE;--pink-light:#FBEAF2;--orange:#C85A1E;--orange-light:#F5E8E0;--dark:#1A1714;--mid:#5C5650;--white:#FFFFFF;--fd:'Playfair Display',Georgia,serif;--fb:'DM Sans',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--fb);background:var(--cream);color:var(--dark);}
+nav{padding:1.25rem 2.5rem;display:flex;align-items:center;justify-content:space-between;background:rgba(245,240,232,0.97);border-bottom:1px solid rgba(200,90,30,0.1);position:sticky;top:0;z-index:10;}
+.nav-logo{font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--orange);text-decoration:none;}
+.nav-back{font-size:0.82rem;color:var(--mid);text-decoration:none;}
+.nav-back:hover{color:var(--orange);}
+.nav-cta{background:var(--orange);color:var(--white);padding:0.45rem 1.1rem;border-radius:100px;font-size:0.8rem;font-weight:700;text-decoration:none;}
+
+.hero{background:var(--dark);padding:5rem;text-align:center;}
+.hero-tag{display:inline-block;background:rgba(240,123,174,0.15);color:var(--pink);font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:0.4rem 1rem;border-radius:100px;margin-bottom:1.25rem;}
+.hero-title{font-family:var(--fd);font-size:clamp(2.5rem,5vw,4rem);font-weight:900;line-height:1.05;color:var(--white);margin-bottom:1rem;}
+.hero-title span{color:var(--orange);}
+.hero-sub{font-size:1rem;color:rgba(245,240,232,0.6);max-width:580px;margin:0 auto 2.5rem;line-height:1.7;}
+.hero-stats{display:flex;gap:3rem;justify-content:center;flex-wrap:wrap;}
+.stat-num{font-family:var(--fd);font-size:2.5rem;font-weight:900;color:var(--orange);line-height:1;}
+.stat-txt{font-size:0.72rem;color:rgba(245,240,232,0.4);margin-top:4px;text-transform:uppercase;letter-spacing:0.08em;}
+
+.section{padding:5rem;}
+.section-inner{max-width:1000px;margin:0 auto;}
+.section-tag{font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--orange);margin-bottom:0.75rem;}
+.section-title{font-family:var(--fd);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;line-height:1.1;margin-bottom:0.75rem;}
+.section-title span{color:var(--orange);}
+.section-desc{font-size:0.95rem;color:var(--mid);line-height:1.7;margin-bottom:2.5rem;max-width:600px;}
+
+/* CUENTAS */
+.cuentas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;}
+.cuenta-card{background:var(--white);border-radius:20px;overflow:hidden;border:1.5px solid transparent;transition:transform 0.2s,border-color 0.2s;text-decoration:none;color:inherit;display:block;}
+.cuenta-card:hover{transform:translateY(-4px);border-color:var(--pink);}
+.cuenta-preview{height:160px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;}
+.ig{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);}
+.blue{background:linear-gradient(135deg,#1a73e8,#0d47a1);}
+.teal{background:linear-gradient(135deg,#00b4d8,#0077b6);}
+.orange-grad{background:linear-gradient(135deg,#ff6b35,#f7931e);}
+.plat-tag{position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,0.5);color:#fff;font-size:10px;font-weight:600;padding:3px 8px;border-radius:100px;}
+.cuenta-info{padding:1.25rem;}
+.cuenta-nombre{font-family:var(--fd);font-size:1.05rem;font-weight:700;color:var(--dark);margin-bottom:3px;}
+.cuenta-handle{font-size:0.75rem;color:var(--orange);margin-bottom:8px;}
+.cuenta-desc{font-size:0.8rem;color:var(--mid);line-height:1.5;margin-bottom:10px;}
+.cuenta-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;}
+.ctag{background:var(--cream);color:var(--mid);font-size:0.65rem;font-weight:600;padding:3px 8px;border-radius:100px;}
+.ver-link{font-size:0.75rem;font-weight:700;color:var(--orange);}
+
+/* REELS */
+.reels-section{background:var(--white);}
+.reels-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+.reel-card{background:var(--cream);border-radius:16px;overflow:hidden;text-decoration:none;color:inherit;display:block;transition:transform 0.2s;}
+.reel-card:hover{transform:translateY(-3px);}
+.reel-preview{aspect-ratio:9/16;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);display:flex;align-items:center;justify-content:center;position:relative;}
+.reel-preview.blue-grad{background:linear-gradient(135deg,#1a73e8,#0d47a1);}
+.play-btn{width:40px;height:40px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.play-btn::after{content:'';border-left:14px solid var(--dark);border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:3px;}
+.reel-lbl{position:absolute;bottom:8px;left:8px;background:rgba(0,0,0,0.6);color:#fff;font-size:10px;font-weight:600;padding:3px 8px;border-radius:100px;}
+.reel-info{padding:0.75rem;}
+.reel-cliente{font-size:0.7rem;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px;}
+.reel-desc{font-size:0.75rem;color:var(--mid);}
+
+/* LIBROS */
+.libros-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.libro-card{background:var(--white);border-radius:20px;padding:2rem;display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:center;text-decoration:none;color:inherit;border:1.5px solid var(--cream);transition:border-color 0.2s,transform 0.2s;}
+.libro-card:hover{border-color:var(--pink);transform:translateY(-3px);}
+.libro-icono{width:80px;height:110px;background:linear-gradient(135deg,var(--orange),var(--pink));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0;}
+.libro-titulo{font-family:var(--fd);font-size:1.05rem;font-weight:700;color:var(--dark);margin-bottom:4px;line-height:1.3;}
+.libro-sub{font-size:0.78rem;color:var(--orange);margin-bottom:8px;}
+.libro-desc{font-size:0.78rem;color:var(--mid);line-height:1.5;margin-bottom:10px;}
+.libro-link{font-size:0.75rem;font-weight:700;color:var(--orange);}
+
+/* TALLERES */
+.talleres-section{background:var(--dark);}
+.talleres-section .section-tag{color:var(--pink);}
+.talleres-section .section-title{color:var(--white);}
+.talleres-section .section-desc{color:rgba(245,240,232,0.5);}
+.taller-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:2rem;margin-bottom:1rem;}
+.taller-org{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--pink);margin-bottom:6px;}
+.taller-nombre{font-family:var(--fd);font-size:1.2rem;font-weight:700;color:var(--white);margin-bottom:8px;}
+.taller-meta{display:flex;gap:0.6rem;flex-wrap:wrap;margin-bottom:8px;}
+.tmeta{font-size:0.72rem;color:rgba(245,240,232,0.5);background:rgba(255,255,255,0.06);padding:4px 10px;border-radius:100px;}
+.taller-desc{font-size:0.85rem;color:rgba(245,240,232,0.55);line-height:1.6;}
+
+/* PROPIAS */
+.propias-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.propia-card{background:var(--white);border-radius:20px;padding:2rem;text-decoration:none;color:inherit;border:1.5px solid var(--cream);transition:border-color 0.2s,transform 0.2s;display:block;}
+.propia-card:hover{border-color:var(--pink);transform:translateY(-3px);}
+.propia-tipo{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);margin-bottom:6px;}
+.propia-nombre{font-family:var(--fd);font-size:1.3rem;font-weight:700;color:var(--dark);margin-bottom:3px;}
+.propia-handle{font-size:0.85rem;color:var(--orange);margin-bottom:10px;}
+.propia-desc{font-size:0.85rem;color:var(--mid);line-height:1.6;}
+
+/* CTA */
+.cta-section{background:var(--orange);padding:5rem;text-align:center;}
+.cta-title{font-family:var(--fd);font-size:clamp(2rem,4vw,3rem);font-weight:900;color:var(--white);margin-bottom:1rem;}
+.cta-sub{font-size:1rem;color:rgba(255,255,255,0.75);max-width:540px;margin:0 auto 2rem;line-height:1.7;}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.cta-btn{display:inline-block;background:var(--white);color:var(--orange);padding:0.9rem 2rem;border-radius:100px;font-weight:700;font-size:0.9rem;text-decoration:none;}
+.cta-btn.outline{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,0.4);}
+
+footer{background:var(--dark);padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;}
+.footer-logo{font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--orange);}
+.footer-copy{font-size:0.75rem;color:rgba(245,240,232,0.3);}
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}
+  .hero{padding:3.5rem 1.5rem;}
+  .section{padding:3.5rem 1.5rem;}
+  .cuentas-grid{grid-template-columns:1fr;}
+  .reels-grid{grid-template-columns:repeat(2,1fr);}
+  .libros-grid,.propias-grid{grid-template-columns:1fr;}
+  .cta-section{padding:3.5rem 1.5rem;}
+  footer{flex-direction:column;gap:0.75rem;text-align:center;padding:1.5rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-back">vanessacid.com</a>
+  <a href="index.html" class="nav-logo">vanessa cid</a>
+  <a href="contacto.html" class="nav-cta">Contactar</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Portfolio de trabajos</div>
+  <h1 class="hero-title">Contenido que <span>conecta</span><br>y marcas que crecen.</h1>
+  <p style="display:inline-block;background:rgba(240,123,174,0.12);color:var(--pink);font-size:0.75rem;font-weight:600;padding:4px 14px;border-radius:100px;margin-bottom:1rem;">Seleccion de trabajos del ultimo ano</p><br><p class="hero-sub">Gestiono redes, creo contenido y construyo estrategias digitales para negocios en Espana, Venezuela, Estados Unidos, Puerto Rico, Bolivia y Andorra. Todo desde Vigo, con resultados reales.</p>
+  <div class="hero-stats">
+    <div><div class="stat-num">25+</div><div class="stat-txt">Cuentas gestionadas</div></div>
+    <div><div class="stat-num">5+</div><div class="stat-txt">Paises</div></div>
+    <div><div class="stat-num">5+</div><div class="stat-txt">Talleres impartidos</div></div>
+    <div><div class="stat-num">100%</div><div class="stat-txt">Autonoma</div></div>
+  </div>
+</div>
+
+<!-- GESTION COMPLETA -->
+<div class="section">
+  <div class="section-inner">
+    <p class="section-tag">Gestion y creacion de contenido</p>
+    <h2 class="section-title">Cuentas que <span>gestiono</span></h2>
+    <p class="section-desc">Gestion completa a distancia — estrategia, creacion, edicion y publicacion. El cliente envia el material o lo genero con IA.</p>
+    <div class="cuentas-grid">
+
+      <a href="https://www.instagram.com/plansoloparachicas" target="_blank" class="cuenta-card">
+        <div class="cuenta-preview ig"><div></div><span class="plat-tag">Instagram</span></div>
+        <div class="cuenta-info">
+          <div class="cuenta-nombre">Plan Vacacional Solo Para Chicas</div>
+          <div class="cuenta-handle">@plansoloparachicas</div>
+          <div class="cuenta-desc">Programa vacacional para chicas en Caracas. Gestion completa de Instagram — estrategia, contenido y publicacion.</div>
+          <div class="cuenta-tags"><span class="ctag">Gestion completa</span><span class="ctag">Venezuela</span><span class="ctag">Remoto</span></div>
+          <span class="ver-link">Ver cuenta en Instagram →</span>
+        </div>
+      </a>
+
+      <a href="https://www.instagram.com/urbansportlaseu" target="_blank" class="cuenta-card">
+        <div class="cuenta-preview blue"><div>️</div><span class="plat-tag">Instagram</span></div>
+        <div class="cuenta-info">
+          <div class="cuenta-nombre">Urban Sport La Seu</div>
+          <div class="cuenta-handle">@urbansportlaseu</div>
+          <div class="cuenta-desc">Centro deportivo en Cataluna. Creacion y gestion de contenido en Instagram con material proporcionado por el cliente.</div>
+          <div class="cuenta-tags"><span class="ctag">Gestion completa</span><span class="ctag">Espana</span><span class="ctag">Remoto</span></div>
+          <span class="ver-link">Ver cuenta en Instagram →</span>
+        </div>
+      </a>
+
+      <a href="https://www.instagram.com/visibilidadon" target="_blank" class="cuenta-card">
+        <div class="cuenta-preview teal"><div></div><span class="plat-tag">Multi-plataforma</span></div>
+        <div class="cuenta-info">
+          <div class="cuenta-nombre">VisibilidadOn</div>
+          <div class="cuenta-handle">@visibilidadon</div>
+          <div class="cuenta-desc">Agencia de SEO y marketing digital. Gestion en Instagram, YouTube, LinkedIn y Spotify.</div>
+          <div class="cuenta-tags"><span class="ctag">Multi-plataforma</span><span class="ctag">Espana</span><span class="ctag">Remoto</span></div>
+          <span class="ver-link">Ver cuenta en Instagram →</span>
+        </div>
+      </a>
+
+      <a href="https://www.instagram.com/solarinstallersofflorida" target="_blank" class="cuenta-card">
+        <div class="cuenta-preview orange-grad"><div>️</div><span class="plat-tag">Instagram</span></div>
+        <div class="cuenta-info">
+          <div class="cuenta-nombre">Solar Installers of Florida</div>
+          <div class="cuenta-handle">@solarinstallersofflorida</div>
+          <div class="cuenta-desc">Empresa de energia solar en Florida. Creacion de contenido con material del cliente e inteligencia artificial.</div>
+          <div class="cuenta-tags"><span class="ctag">Creacion con IA</span><span class="ctag">USA</span><span class="ctag">English</span></div>
+          <span class="ver-link">Ver cuenta en Instagram →</span>
+        </div>
+      </a>
+
+      <a href="https://www.instagram.com/sunplus.pr" target="_blank" class="cuenta-card">
+        <div class="cuenta-preview orange-grad"><div></div><span class="plat-tag">Instagram</span></div>
+        <div class="cuenta-info">
+          <div class="cuenta-nombre">SunPlus PR</div>
+          <div class="cuenta-handle">@sunplus.pr</div>
+          <div class="cuenta-desc">Empresa de soluciones solares en Puerto Rico. Contenido creado con material proporcionado e IA.</div>
+          <div class="cuenta-tags"><span class="ctag">Creacion con IA</span><span class="ctag">Puerto Rico</span><span class="ctag">English</span></div>
+          <span class="ver-link">Ver cuenta en Instagram →</span>
+        </div>
+      </a>
+
+      <a href="https://www.instagram.com/solarstorepr" target="_blank" class="cuenta-card">
+        <div class="cuenta-preview orange-grad"><div></div><span class="plat-tag">Instagram</span></div>
+        <div class="cuenta-info">
+          <div class="cuenta-nombre">Solar Store PR / Innovation Home</div>
+          <div class="cuenta-handle">@solarstorepr</div>
+          <div class="cuenta-desc">Tienda de productos solares. Creacion de contenido visual con IA y material del cliente.</div>
+          <div class="cuenta-tags"><span class="ctag">Creacion con IA</span><span class="ctag">Puerto Rico</span><span class="ctag">English</span></div>
+          <span class="ver-link">Ver cuenta en Instagram →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<!-- REELS -->
+<div class="section reels-section">
+  <div class="section-inner">
+    <p class="section-tag">Grabacion y edicion</p>
+    <h2 class="section-title">Reels <span>producidos</span></h2>
+    <p class="section-desc">Grabacion presencial y edicion profesional. Contenido optimizado para Instagram con subtitulos, efectos y formato vertical.</p>
+    <div class="reels-grid">
+      <a href="https://www.instagram.com/reel/DZVn37stVso/" target="_blank" class="reel-card">
+        <div class="reel-preview"><div class="play-btn"></div><span class="reel-lbl">Baruta Burger</span></div>
+        <div class="reel-info"><div class="reel-cliente">Baruta Burger</div><div class="reel-desc">Reel de producto</div></div>
+      </a>
+      <a href="https://www.instagram.com/reel/DaznVj3NtOI/" target="_blank" class="reel-card">
+        <div class="reel-preview"><div class="play-btn"></div><span class="reel-lbl">Baruta Burger</span></div>
+        <div class="reel-info"><div class="reel-cliente">Baruta Burger</div><div class="reel-desc">Reel de marca</div></div>
+      </a>
+      <a href="https://www.instagram.com/reel/Da_AW0oNquS/" target="_blank" class="reel-card">
+        <div class="reel-preview"><div class="play-btn"></div><span class="reel-lbl">Baruta Burger</span></div>
+        <div class="reel-info"><div class="reel-cliente">Baruta Burger</div><div class="reel-desc">Reel promocional</div></div>
+      </a>
+      <a href="https://www.instagram.com/reel/DZGIIWjtq6C/" target="_blank" class="reel-card">
+        <div class="reel-preview"><div class="play-btn"></div><span class="reel-lbl">Baruta Burger</span></div>
+        <div class="reel-info"><div class="reel-cliente">Baruta Burger</div><div class="reel-desc">Reel de contenido</div></div>
+      </a>
+      <a href="https://www.instagram.com/reel/DZqHlSiNPtf/" target="_blank" class="reel-card">
+        <div class="reel-preview"><div class="play-btn"></div><span class="reel-lbl">Baruta Burger</span></div>
+        <div class="reel-info"><div class="reel-cliente">Baruta Burger</div><div class="reel-desc">Reel dinamico</div></div>
+      </a>
+      <a href="https://www.instagram.com/reel/Da5A-sytZrx/" target="_blank" class="reel-card">
+        <div class="reel-preview"><div class="play-btn"></div><span class="reel-lbl">Baruta Burger</span></div>
+        <div class="reel-info"><div class="reel-cliente">Baruta Burger</div><div class="reel-desc">Reel de producto</div></div>
+      </a>
+      <a href="https://www.instagram.com/reel/DY15D-nozGE/" target="_blank" class="reel-card">
+        <div class="reel-preview"><div class="play-btn"></div><span class="reel-lbl">Baruta Burger</span></div>
+        <div class="reel-info"><div class="reel-cliente">Baruta Burger</div><div class="reel-desc">Reel de marca</div></div>
+      </a>
+      <a href="https://www.instagram.com/reel/Dc88Jr1sPHk/" target="_blank" class="reel-card">
+        <div class="reel-preview blue-grad"><div class="play-btn"></div><span class="reel-lbl">Urban Sport</span></div>
+        <div class="reel-info"><div class="reel-cliente">Urban Sport La Seu</div><div class="reel-desc">Reel deportivo</div></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- LIBROS -->
+<div class="section">
+  <div class="section-inner">
+    <p class="section-tag">Publicaciones</p>
+    <h2 class="section-title">Libros <span>publicados</span></h2>
+    <p class="section-desc">Guias practicas publicadas en Amazon en formato ebook y tapa blanda.</p>
+    <div class="libros-grid">
+      <a href="https://www.amazon.es/Instagram-negocios-tienen-tiempo-perder/dp/B0GXKJ5SDL" target="_blank" class="libro-card">
+        <div class="libro-icono" style="font-size:1rem;font-weight:700;color:#fff;text-align:center;line-height:110px;">Libro</div>
+        <div>
+          <div class="libro-titulo">Instagram para negocios que no tienen tiempo que perder</div>
+          <div class="libro-sub">La guia de 0 a 100 para crecer, vender y destacar</div>
+          <div class="libro-desc">Guia practica para usar Instagram a favor de tu negocio sin perder tiempo innecesario.</div>
+          <span class="libro-link">Ver en Amazon →</span>
+        </div>
+      </a>
+      <a href="https://www.amazon.es/Lanza-marca-IA-conecta-experto/dp/B0FCS9BC84" target="_blank" class="libro-card">
+        <div class="libro-icono" style="font-size:1rem;font-weight:700;color:#fff;text-align:center;line-height:110px;">Libro</div>
+        <div>
+          <div class="libro-titulo">Lanza tu marca con IA</div>
+          <div class="libro-sub">Conecta, vende y posicionate como experto</div>
+          <div class="libro-desc">Guia practica para usar inteligencia artificial en tu estrategia de marca.</div>
+          <span class="libro-link">Ver en Amazon →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- TALLERES -->
+<div class="section talleres-section">
+  <div class="section-inner">
+    <p class="section-tag">Formacion</p>
+    <h2 class="section-title">Talleres <span style="color:var(--pink)">impartidos</span></h2>
+    <p class="section-desc">Formacion presencial para empresas, asociaciones y emprendedores.</p>
+    <div class="taller-card">
+      <div class="taller-org">Congreso Horizonte 27 — Vigo</div>
+      <div class="taller-nombre">Redes Sociales y su Importancia en la Digitalizacion</div>
+      <div class="taller-meta">
+        <span class="tmeta">2025</span><span class="tmeta">Vigo</span><span class="tmeta">Invitada especial</span><span class="tmeta">Presencial</span>
+      </div>
+      <div class="taller-desc">Ponencia en el Congreso Horizonte 27 sobre el papel de las redes sociales en la transformacion digital de los negocios. <a href="https://www.instagram.com/p/DYMcZJMiuUr/" target="_blank" style="color:var(--pink);">Ver publicacion</a></div>
+    </div>
+    <div class="taller-card" style="margin-top:1rem;">
+      <div class="taller-org">AJE Galicia</div>
+      <div class="taller-nombre">Por que tu Instagram no te esta trayendo clientes</div>
+      <div class="taller-meta">
+        <span class="tmeta">2025</span><span class="tmeta">Galicia</span><span class="tmeta">Presencial</span>
+      </div>
+      <div class="taller-desc">Taller practico para emprendedores y pequenas empresas sobre estrategia de contenido en Instagram y captacion de clientes. <a href="https://www.instagram.com/p/DW8_uxYiscL/" target="_blank" style="color:var(--pink);">Ver publicacion</a></div>
+    </div>
+    <div class="taller-card" style="margin-top:1rem;">
+      <div class="taller-org">Taller presencial</div>
+      <div class="taller-nombre">ChatGPT para Negocios</div>
+      <div class="taller-meta">
+        <span class="tmeta">2025</span><span class="tmeta">Presencial</span><span class="tmeta">Inteligencia Artificial</span>
+      </div>
+      <div class="taller-desc">Taller practico sobre el uso de ChatGPT e inteligencia artificial aplicada a la gestion y crecimiento de negocios. <a href="https://www.instagram.com/p/DXuBGOAjEqK/" target="_blank" style="color:var(--pink);">Ver publicacion</a></div>
+    </div>
+    <div class="taller-card" style="margin-top:1rem;">
+      <div class="taller-org">AJE Vigo & ABANCA Innova — 2026</div>
+      <div class="taller-nombre">Instagram para negocios que no tienen tiempo que perder</div>
+      <div class="taller-meta">
+        <span class="tmeta">Julio 2026</span><span class="tmeta">Vigo</span><span class="tmeta">Presencial</span><span class="tmeta">Gratuito</span><span class="tmeta">Plazas agotadas</span>
+      </div>
+      <div class="taller-desc">Taller de 3 horas para emprendedores. Optimizacion de perfil, creacion de contenido, IA y planificacion. Con recaudacion solidaria para Venezuela.</div>
+    </div>
+    <div class="taller-card" style="margin-top:1rem;">
+      <div class="taller-org">ABANCA Vigo — 2025</div>
+      <div class="taller-nombre">Instagram para negocios que no tienen tiempo que perder</div>
+      <div class="taller-meta">
+        <span class="tmeta">Julio 2025</span><span class="tmeta">Vigo</span><span class="tmeta">Presencial</span><span class="tmeta">Plazas agotadas</span>
+      </div>
+      <div class="taller-desc">Workshop practico sobre estrategia de contenido en Instagram para pequenos negocios y emprendedores.</div>
+    </div>
+
+      <div class="taller-nombre">Instagram para negocios que no tienen tiempo que perder</div>
+      <div class="taller-meta">
+        <span class="tmeta">Julio 2026</span><span class="tmeta">Vigo</span><span class="tmeta">Presencial</span><span class="tmeta">Gratuito</span><span class="tmeta">Plazas agotadas</span>
+      </div>
+      <div class="taller-desc">Taller de 3 horas para emprendedores. Optimizacion de perfil, creacion de contenido, IA y planificacion. Con recaudacion solidaria para Venezuela.</div>
+    </div>
+    <div class="taller-card" style="margin-top:1rem;">
+      <div class="taller-org">ABANCA Vigo — 2025</div>
+      <div class="taller-nombre">Instagram para negocios que no tienen tiempo que perder</div>
+      <div class="taller-meta">
+        <span class="tmeta">Julio 2025</span><span class="tmeta">Vigo</span><span class="tmeta">Presencial</span><span class="tmeta">Plazas agotadas</span>
+      </div>
+      <div class="taller-desc">Workshop practico sobre estrategia de contenido en Instagram para pequenos negocios y emprendedores.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROPIAS -->
+<div class="section">
+  <div class="section-inner">
+    <p class="section-tag">Marca personal</p>
+    <h2 class="section-title">Mis cuentas <span>propias</span></h2>
+    <p class="section-desc">Donde aplico todo lo que enseno y comparto lo que aprendo.</p>
+    <div class="propias-grid">
+      <a href="https://www.instagram.com/soyvanessacid" target="_blank" class="propia-card">
+        <div class="propia-tipo">Cuenta profesional</div>
+        <div class="propia-nombre">soyvanessacid</div>
+        <div class="propia-handle">@soyvanessacid</div>
+        <div class="propia-desc">Marketing, IA y estrategia de contenido para negocios. Aqui comparto todo lo que se sobre hacer crecer marcas con Instagram.</div>
+      </a>
+      <a href="https://www.instagram.com/vanecid" target="_blank" class="propia-card">
+        <div class="propia-tipo">Cuenta personal</div>
+        <div class="propia-nombre">vanecid</div>
+        <div class="propia-handle">@vanecid</div>
+        <div class="propia-desc">Mi lado mas personal. Vida en Vigo, viajes, familia y todo lo que no cabe en la cuenta profesional.</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2 class="cta-title">Trabajemos juntos</h2>
+  <p class="cta-sub">Autonoma con base en Vigo. Disponible para proyectos en remoto y desplazamientos por Galicia. Mas de 25 cuentas gestionadas en 5 paises. Venezolana de origen, gallega por los cuatro abuelos.</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/34611789200" target="_blank" class="cta-btn">WhatsApp</a>
+    <a href="contacto.html" class="cta-btn outline">Formulario de contacto</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">vanessa cid</div>
+  <p class="footer-copy">2026 Vanessa Cid - Marketing & IA para negocios</p>
+</footer>
+
+</body>
+</html>

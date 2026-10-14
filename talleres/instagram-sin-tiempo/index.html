@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Taller Instagram · Vanessa Cid</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --mag: #C8326B;
+  --nar: #E8622A;
+  --dk:  #111111;
+  --mid: #3A3A3A;
+  --soft: #888;
+  --cream: #F7F6F3;
+  --line: #E8E8E8;
+  --mag-l: #FAECF2;
+  --nar-l: #FEF0E8;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Inter',system-ui,sans-serif;
+  background:#fff; color:var(--dk);
+  max-width:480px; margin:0 auto;
+  padding-bottom:60px;
+}
+
+/* ── HERO ── */
+.hero {
+  background:var(--dk);
+  padding:52px 28px 40px;
+  position:relative; overflow:hidden;
+}
+.hero::before {
+  content:''; position:absolute; top:-80px; right:-60px;
+  width:280px; height:280px; border-radius:50%;
+  background:var(--mag); opacity:0.12;
+}
+.hero::after {
+  content:''; position:absolute; bottom:-60px; left:-40px;
+  width:200px; height:200px; border-radius:50%;
+  background:var(--nar); opacity:0.10;
+}
+.hero-brand {
+  font-size:14px; font-weight:800; color:var(--mag);
+  margin-bottom:28px; position:relative; z-index:1;
+}
+.hero-tag {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.6);
+  padding:7px 14px; border-radius:100px;
+  font-size:12px; font-weight:700; letter-spacing:0.06em;
+  margin-bottom:16px; position:relative; z-index:1;
+}
+.hero h1 {
+  font-size:32px; font-weight:900; color:#fff;
+  line-height:1.0; letter-spacing:-0.03em;
+  margin-bottom:12px; position:relative; z-index:1;
+}
+.hero h1 span { color:var(--mag); }
+.hero-sub {
+  font-size:15px; color:rgba(255,255,255,0.5);
+  font-weight:500; position:relative; z-index:1;
+  line-height:1.5;
+}
+
+/* ── SECTION ── */
+.section { padding:24px 20px 0; }
+.section-header {
+  display:flex; align-items:center; gap:10px; margin-bottom:14px;
+}
+.section-num {
+  width:28px; height:28px; border-radius:50%;
+  background:var(--mag); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-size:13px; font-weight:800; flex-shrink:0;
+}
+.section-num.dk  { background:var(--dk); }
+.section-num.nar { background:var(--nar); }
+.section-title { font-size:18px; font-weight:800; color:var(--dk); }
+.section-sub   { font-size:13px; color:var(--soft); font-weight:500; }
+
+/* ── RESOURCE CARD ── */
+.res {
+  border-radius:16px; border:1.5px solid var(--line);
+  margin-bottom:10px; text-decoration:none; display:block;
+  transition:border-color 0.15s;
+}
+.res:active { border-color:var(--mag); }
+.res-inner {
+  padding:18px; display:flex; align-items:center; gap:14px;
+}
+.res-icon {
+  width:48px; height:48px; border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:24px; flex-shrink:0;
+}
+.ic-mag  { background:var(--mag-l); }
+.ic-nar  { background:var(--nar-l); }
+.ic-dk   { background:#F0F0F0; }
+.ic-pur  { background:#F5F3FF; }
+.ic-grn  { background:#F0FDF4; }
+.ic-blue { background:#EFF6FF; }
+
+.res-body  { flex:1; }
+.res-name  { font-size:16px; font-weight:800; color:var(--dk); margin-bottom:2px; }
+.res-desc  { font-size:13px; color:var(--soft); font-weight:500; line-height:1.4; }
+.res-arrow { font-size:18px; color:var(--line); flex-shrink:0; }
+
+.res-badge {
+  display:inline-flex; align-items:center; gap:4px;
+  padding:3px 10px; border-radius:100px;
+  font-size:11px; font-weight:700; margin-top:5px;
+}
+.badge-live { background:#DCFCE7; color:#16A34A; }
+.badge-qr   { background:var(--mag-l); color:var(--mag); }
+.badge-gift { background:var(--nar-l); color:var(--nar); }
+.badge-ext  { background:#EFF6FF; color:#2563EB; }
+
+/* ── DIVIDER ── */
+.divider { height:1px; background:var(--line); margin:24px 20px 0; }
+
+/* ── NOTE ── */
+.note {
+  margin:16px 20px 0; background:var(--nar-l);
+  border-radius:12px; padding:14px 16px;
+  display:flex; gap:10px;
+}
+.note-icon { font-size:18px; flex-shrink:0; }
+.note-text { font-size:13px; color:var(--mid); line-height:1.5; font-weight:500; }
+
+/* ── PRESENTER ── */
+.presenter {
+  margin:24px 20px 0; background:var(--cream);
+  border-radius:16px; padding:20px;
+  display:flex; align-items:center; gap:16px;
+}
+.presenter-avatar {
+  width:52px; height:52px; border-radius:50%;
+  background:linear-gradient(135deg,var(--mag),var(--nar));
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-weight:900; font-size:20px; flex-shrink:0;
+}
+.presenter-name { font-size:16px; font-weight:800; color:var(--dk); }
+.presenter-role { font-size:13px; color:var(--soft); font-weight:500; margin-top:2px; }
+.presenter-links { display:flex; gap:8px; margin-top:8px; }
+.presenter-link {
+  font-size:12px; font-weight:700; color:var(--mag);
+  text-decoration:none; padding:4px 10px;
+  background:var(--mag-l); border-radius:100px;
+}
+
+/* ── FOOTER ── */
+.footer {
+  text-align:center; padding:28px 20px 0;
+  margin-top:24px; border-top:1px solid var(--line);
+}
+.footer-logo { font-size:15px; font-weight:800; color:var(--mag); margin-bottom:4px; }
+.footer-sub  { font-size:12px; color:var(--soft); font-weight:600; }
+
+/* ── RESPONSIVE: DESKTOP ────────────────────────── */
+@media (min-width: 768px) {
+  body {
+    max-width: 100%;
+    background: #F7F6F3;
+  }
+  .page-wrap {
+    max-width: 480px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-brand">vanessacid.com</div>
+  <div class="hero-tag">🎓 Taller presencial</div>
+  <h1>Instagram para<br>Negocios que <span>No</span><br>Tienen Tiempo<br>que Perder</h1>
+  <div class="hero-sub">Todos los recursos del taller<br>en un solo sitio.</div>
+</div>
+
+<!-- BLOQUE 1: PRESENTACIÓN -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div>
+      <div class="section-title">Presentación</div>
+      <div class="section-sub">Las slides del taller</div>
+    </div>
+  </div>
+  <a href="/" class="res">
+    <div class="res-inner">
+      <div class="res-icon ic-dk">🖥️</div>
+      <div class="res-body">
+        <div class="res-name">Presentación principal</div>
+        <div class="res-desc">35 slides · Navegación con flechas · F para pantalla completa</div>
+        <div class="res-badge badge-live">● Abrir</div>
+      </div>
+      <div class="res-arrow">›</div>
+    </div>
+  </a>
+</div>
+
+<div class="divider"></div>
+
+<!-- BLOQUE 2: DINÁMICAS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num nar">2</div>
+    <div>
+      <div class="section-title">Dinámicas interactivas</div>
+      <div class="section-sub">Los asistentes las abren desde su móvil</div>
+    </div>
+  </div>
+  <a href="/blog/auditoria-instagram/" class="res">
+    <div class="res-inner">
+      <div class="res-icon ic-mag">🔍</div>
+      <div class="res-body">
+        <div class="res-name">Auditoría Express</div>
+        <div class="res-desc">Analiza un perfil de Instagram · 8 preguntas · Informe con email</div>
+        <div class="res-badge badge-qr">📱 Bloque Perfil</div>
+      </div>
+      <div class="res-arrow">›</div>
+    </div>
+  </a>
+  <a href="brujula.html" class="res">
+    <div class="res-inner">
+      <div class="res-icon ic-pur">🧭</div>
+      <div class="res-body">
+        <div class="res-name">Brújula de Contenido</div>
+        <div class="res-desc">Diagnóstico estratégico personalizado · 4 perfiles · PDF + WhatsApp</div>
+        <div class="res-badge badge-qr">📱 Bloque Plan</div>
+      </div>
+      <div class="res-arrow">›</div>
+    </div>
+  </a>
+</div>
+
+<div class="divider"></div>
+
+<!-- BLOQUE 3: RECURSOS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num dk">3</div>
+    <div>
+      <div class="section-title">Recursos para llevarse</div>
+      <div class="section-sub">Un solo QR en el cierre</div>
+    </div>
+  </div>
+  <a href="recursos.html" class="res" style="border-color:var(--mag);">
+    <div class="res-inner">
+      <div class="res-icon ic-mag">✨</div>
+      <div class="res-body">
+        <div class="res-name">Página de recursos</div>
+        <div class="res-desc">Guía + Prompts + GPT + Herramientas · Todo en un sitio</div>
+        <div class="res-badge badge-qr">📱 QR cierre del taller</div>
+      </div>
+      <div class="res-arrow">›</div>
+    </div>
+  </a>
+  <a href="https://drive.google.com/uc?export=download&id=1oG9Bc0OxmdQgYNuTQRyiQR7Bci9lVRWI" class="res">
+    <div class="res-inner">
+      <div class="res-icon ic-dk">📖</div>
+      <div class="res-body">
+        <div class="res-name">Guía PDF</div>
+        <div class="res-desc">Instagram para Negocios · 11 capítulos · Descarga directa</div>
+        <div class="res-badge badge-gift">🎁 Gratis</div>
+      </div>
+      <div class="res-arrow">›</div>
+    </div>
+  </a>
+  <a href="recursos.html" class="res">
+    <div class="res-inner">
+      <div class="res-icon ic-nar">💬</div>
+      <div class="res-body">
+        <div class="res-name">Los 8 prompts</div>
+        <div class="res-desc">Listos para copiar · Ideas, hooks, captions, guiones, bio</div>
+        <div class="res-badge badge-gift">🎁 Gratis</div>
+      </div>
+      <div class="res-arrow">›</div>
+    </div>
+  </a>
+  <a href="https://chatgpt.com/g/g-6a5e161469348191b780c97f09f5cc5e-asistente-de-contenido-vanessa-cid" target="_blank" class="res">
+    <div class="res-inner">
+      <div class="res-icon ic-pur">🤖</div>
+      <div class="res-body">
+        <div class="res-name">GPT Asistente de Contenido</div>
+        <div class="res-desc">Ideas para tu negocio en segundos · Entrenado por Vanessa Cid</div>
+        <div class="res-badge badge-ext">↗ ChatGPT</div>
+      </div>
+      <div class="res-arrow">›</div>
+    </div>
+  </a>
+</div>
+
+<div class="divider"></div>
+
+<!-- BLOQUE 4: HERRAMIENTAS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num dk">4</div>
+    <div>
+      <div class="section-title">Herramientas recomendadas</div>
+      <div class="section-sub">Las que uso y enseño en el taller</div>
+    </div>
+  </div>
+  <a href="https://chatgpt.com" target="_blank" class="res">
+    <div class="res-inner">
+      <div class="res-icon ic-grn">🤖</div>
+      <div class="res-body">
+        <div class="res-name">ChatGPT</div>
+        <div class="res-desc">Ideas, hooks, captions y guiones en segundos</div>
+        <div class="res-badge badge-ext">↗ chatgpt.com</div>
+      </div>
+      <div class="res-arrow">›</div>
+    </div>
+  </a>
+  <a href="https://gemini.google.com" target="_blank" class="res">
+    <div class="res-inner">
+      <div class="res-icon ic-blue">✦</div>
+      <div class="res-body">
+        <div class="res-name">Gemini</div>
+        <div class="res-desc">Alternativa a ChatGPT · Gratis y muy potente</div>
+        <div class="res-badge badge-ext">↗ gemini.google.com</div>
+      </div>
+      <div class="res-arrow">›</div>
+    </div>
+  </a>
+  <a href="https://canva.com" target="_blank" class="res">
+    <div class="res-inner">
+      <div class="res-icon ic-pur">🎨</div>
+      <div class="res-body">
+        <div class="res-name">Canva</div>
+        <div class="res-desc">Carruseles, stories y flyers en minutos</div>
+        <div class="res-badge badge-ext">↗ canva.com</div>
+      </div>
+      <div class="res-arrow">›</div>
+    </div>
+  </a>
+  <a href="https://capcut.com" target="_blank" class="res">
+    <div class="res-inner">
+      <div class="res-icon ic-dk">🎬</div>
+      <div class="res-body">
+        <div class="res-name">CapCut</div>
+        <div class="res-desc">Edición de Reels con subtítulos automáticos</div>
+        <div class="res-badge badge-ext">↗ capcut.com</div>
+      </div>
+      <div class="res-arrow">›</div>
+    </div>
+  </a>
+</div>
+
+<div class="note">
+  <div class="note-icon">💡</div>
+  <div class="note-text">Esta página recoge todos los recursos del taller. Puedes guardarla o compartirla para acceder en cualquier momento.</div>
+</div>
+
+<!-- PRESENTER -->
+<div class="presenter">
+  <div class="presenter-avatar">V</div>
+  <div>
+    <div class="presenter-name">Vanessa Cid</div>
+    <div class="presenter-role">Marketing &amp; IA para negocios</div>
+    <div class="presenter-links">
+      <a href="https://instagram.com/soyvanessacid" target="_blank" class="presenter-link">@soyvanessacid</a>
+      <a href="https://vanessacid.com" target="_blank" class="presenter-link">vanessacid.com</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-logo">vanessacid.com</div>
+  <div class="footer-sub">Taller de Instagram para negocios</div>
+</div>
+
+
+</div>
+</body>
+</html>

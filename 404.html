@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Página no encontrada | Vanessa Cid</title>
+<script>
+// Direcciones antiguas que se han movido. Si alguien llega con un enlace o un QR viejo,
+// lo enviamos a la nueva dirección. Para añadir una: "/antigua": "/nueva",
+(function () {
+  var mapa = {
+    "/blog-articulo-1.html": "/blog/instagram-no-esta-muerto/",
+    "/blog-articulo-2.html": "/blog/perfil-instagram-para-vender/",
+    "/blog-articulo-3.html": "/blog/que-publicar-en-instagram-sin-tiempo/",
+    "/auditoria.html": "/blog/auditoria-instagram/",
+    "/auditoria": "/blog/auditoria-instagram/",
+    "/taller-instagram.html": "/talleres/instagram-sin-tiempo/",
+    "/taller-instagram": "/talleres/instagram-sin-tiempo/",
+    "/recursos.html": "/talleres/instagram-sin-tiempo/recursos.html",
+    "/recursos": "/talleres/instagram-sin-tiempo/recursos.html",
+    "/brujula.html": "/talleres/instagram-sin-tiempo/brujula.html",
+    "/brujula": "/talleres/instagram-sin-tiempo/brujula.html",
+    "/prompts.html": "/talleres/instagram-sin-tiempo/recursos.html"
+  };
+  var ruta = location.pathname.replace(/\/+$/, "") || "/";
+  if (mapa[ruta]) location.replace(mapa[ruta] + location.search + location.hash);
+})();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F5F0E8;--orange:#C85A1E;--dark:#1A1714;--mid:#5C5650}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);min-height:100vh;display:grid;place-items:center;padding:24px}
+main{max-width:560px;text-align:center}
+img{height:44px;width:auto;margin:0 auto 32px;display:block}
+h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(34px,8vw,52px);font-weight:900;line-height:1.1;margin-bottom:14px}
+h1 span{color:var(--orange)}
+p{color:var(--mid);font-size:17px;line-height:1.6;margin-bottom:28px}
+nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+a{padding:12px 22px;border-radius:100px;font-weight:700;text-decoration:none;border:1.5px solid rgba(26,23,20,.15);color:var(--dark)}
+a.principal{background:var(--orange);border-color:var(--orange);color:#fff}
+</style>
+</head>
+<body>
+<main>
+  <img src="/img/logo-vanessa-cid.png" alt="Vanessa Cid">
+  <h1>Esta página <span>no existe.</span></h1>
+  <p>Puede que haya cambiado de dirección. Desde aquí llegas a todo lo importante.</p>
+  <nav>
+    <a class="principal" href="/">Ir al inicio</a>
+    <a href="/servicios.html">Servicios</a>
+    <a href="/blog/">Blog</a>
+  </nav>
+</main>
+</body>
+</html>

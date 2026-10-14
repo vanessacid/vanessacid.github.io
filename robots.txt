@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
 Sitemap: https://vanessacid.com/sitemap.xml
+Sitemap: https://vanessacid.com/blog/sitemap.xml
